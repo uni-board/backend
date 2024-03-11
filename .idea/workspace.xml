@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4d2972c1-98b2-4ad6-b7f2-42f127e204b2" name="Changes" comment="Init">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/Application.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/auth/data/AuthEndpoints.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/auth/data/Module.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/auth/data/RawUser.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/auth/data/TokenRepositoryImpl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/auth/data/UsersRepositoryImpl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/auth/domain/RoutingExt.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/auth/domain/TokenRepository.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/auth/domain/User.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/auth/domain/UsersRepository.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/core/Module.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/core/crypt/CryptService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/core/crypt/impl/CryptServiceImpl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/core/db/DatabaseWrapper.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/core/ktor/KtorConfigurable.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/core/ktor/RoutingExt.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/core/util/Time.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/kotlin/core/util/impl/TimeImpl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/auth/EndpointsTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/auth/UsersRepositoryImplTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/core/crypt/CryptServiceTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/core/crypt/TestCryptService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/core/db/TestDB.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/core/ktor/TestKtor.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/test/kotlin/core/util/Time.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/data/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/data/src/main/kotlin/core/crypt/impl/CryptServiceImpl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/data/src/main/kotlin/core/util/impl/TimeImpl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/db/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/db/src/main/kotlin/core/db/DatabaseWrapper.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/domain/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/domain/src/main/kotlin/core/Module.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/domain/src/main/kotlin/core/crypt/CryptService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/domain/src/main/kotlin/core/crypt/impl/CryptServiceImpl.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/domain/src/main/kotlin/core/util/Time.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/ktor/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/ktor/src/main/kotlin/core/ktor/KtorConfigurable.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/ktor/src/main/kotlin/core/ktor/RoutingExt.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/test/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/test/src/main/kotlin/core/crypt/TestCryptService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/test/src/main/kotlin/core/db/TestDB.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/test/src/main/kotlin/core/ktor/TestKtor.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/test/src/main/kotlin/core/util/Time.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/libs.versions.toml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Data Class" />
+        <option value="Kotlin Interface" />
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2dSnqRldQHiZCNabZ4jTb5nQANI" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build backend.executor": "Run",
+    "Gradle.CryptServiceTest.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
+    "Gradle.EndpointsTest (1).executor": "Run",
+    "Gradle.EndpointsTest.executor": "Run",
+    "Gradle.UsersRepositoryImplTest.executor": "Run",
+    "Kotlin.ApplicationKt (1).executor": "Run",
+    "Kotlin.ApplicationKt.executor": "Run",
+    "Kotlin.MainKt.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "jdk.selected.JAVA_MODULE": "21",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/renattele/IdeaProjects/backend/core/test/src/main/kotlin",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "editor.preferences.folding"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/core/test/src/main/kotlin" />
+      <recent name="$PROJECT_DIR$/core/test" />
+      <recent name="$PROJECT_DIR$/core/data/src/main/kotlin/core/util" />
+      <recent name="$PROJECT_DIR$/core/data" />
+      <recent name="$PROJECT_DIR$/core/ktor" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/core/ktor/src/main/kotlin/core/ktor" />
+    </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="core.db" />
+      <recent name="auth.domain" />
+    </key>
+    <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="core.crypt.impl" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.UsersRepositoryImplTest">
+    <configuration name="EndpointsTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":app:test" />
+            <option value="--tests" />
+            <option value="&quot;auth.EndpointsTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="UsersRepositoryImplTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":app:test" />
+            <option value="--tests" />
+            <option value="&quot;auth.UsersRepositoryImplTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="ApplicationKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ApplicationKt" />
+      <module name="backend.app.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.UsersRepositoryImplTest" />
+        <item itemvalue="Gradle.EndpointsTest" />
+        <item itemvalue="Kotlin.ApplicationKt" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-78a6f59c" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4d2972c1-98b2-4ad6-b7f2-42f127e204b2" name="Changes" comment="" />
+      <created>1710010539349</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1710010539349</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Init" />
+    <option name="LAST_COMMIT_MESSAGE" value="Init" />
+  </component>
+</project>
