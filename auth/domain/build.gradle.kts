@@ -5,8 +5,7 @@ plugins {
 
 configuration {
     internal {
-        +libs.bundles.exposed
-        +libs.koin.core
-        +libs.h2db
+        +libs.bundles.ktor
+        +projects.core.ktor
     }
 }

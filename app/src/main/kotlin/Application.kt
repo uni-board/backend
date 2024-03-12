@@ -1,6 +1,7 @@
 import auth.data.auth
 import auth.data.authModule
 import core.coreModule
+import core.db.dbModule
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -13,7 +14,8 @@ import org.koin.ktor.plugin.Koin
 
 private val modules = listOf(
     coreModule,
-    authModule
+    authModule,
+    dbModule
 )
 
 fun main() {

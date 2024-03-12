@@ -1,5 +1,4 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.util.Properties
+import java.util.*
 
 plugins {
     alias(libs.plugins.configuration)
@@ -8,26 +7,21 @@ plugins {
 }
 
 configuration {
-    internal {
-        +projects.core.data
-        +projects.core.domain
-        +projects.core.ktor
-        +projects.core.db
-
-        +projects.auth.data
-
+    external {
         +libs.bundles.ktor
         +libs.bundles.exposed
         +libs.koin.core
         +libs.koin.ktor
-        +libs.h2db
-        +libs.serialization
+        +projects.core.db
+        +projects.core.domain
+        +projects.core.ktor
+        +projects.auth.domain
     }
     test {
-        +libs.ktor.test
+        +projects.core.test
         +libs.kotlin.test
         +libs.kotlin.test.junit
-        +projects.core.test
+        +libs.ktor.test
     }
 }
 

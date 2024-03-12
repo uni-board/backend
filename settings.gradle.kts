@@ -1,11 +1,9 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         gradlePluginPortal()
         mavenCentral()
     }
-}
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -20,7 +18,8 @@ rootProject.name = "backend"
 rootDir
     .walk()
     .filter {
-        it.isDirectory
+        it.name != "buildSrc" && it.name != "convention"
+                && it.isDirectory
                 && file("${it.absolutePath}/build.gradle.kts").exists()
     }
     .forEach {

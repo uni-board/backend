@@ -1,25 +1,15 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
-    alias(libs.plugins.kotlin)
+    alias(libs.plugins.configuration)
     alias(libs.plugins.serialization)
 }
-
-dependencies {
-    implementation(projects.core.domain)
-    implementation(libs.koin.core)
-}
-
-tasks.test {
-    useJUnitPlatform()
-}
-
-kotlin {
-    jvmToolchain(21)
-}
-
-tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions {
-        freeCompilerArgs = freeCompilerArgs + "-Xcontext-receivers"
+configuration {
+    internal {
+        +projects.core.domain
+        +libs.koin.core
+    }
+    test {
+        +libs.kotlin.test
+        +libs.kotlin.test.junit
+        +libs.jupiter
     }
 }
