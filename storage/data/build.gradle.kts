@@ -5,6 +5,7 @@ plugins {
 
 configuration {
     internal {
+        +project(":storage:domain")
     }
     test {
         +libs.bundles.test
