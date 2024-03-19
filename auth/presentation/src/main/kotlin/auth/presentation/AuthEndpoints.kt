@@ -1,12 +1,8 @@
-package auth.data
+package auth.presentation
 
-import auth.domain.RawUser
-import auth.domain.TokenRepository
-import auth.domain.UsersRepository
-import auth.domain.auth
+import auth.domain.*
 import core.ktor.apiRouting
 import core.ktor.configure
-import core.ktor.userId
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*

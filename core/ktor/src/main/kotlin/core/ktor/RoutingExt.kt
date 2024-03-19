@@ -15,8 +15,3 @@ fun Application.apiRouting(configuration: Route.() -> Unit) {
     }
 }
 
-val ApplicationCall.userId: Long?
-    get() {
-        val principal = principal<JWTPrincipal>()
-        return principal?.payload?.getClaim("userid")?.asString()?.toLong()
-    }

@@ -13,5 +13,7 @@ configuration {
         +libs.jupiter
         +libs.serialization
         +libs.koin.ktor
+        +libs.ktor.negotiation
+        +libs.ktor.serialization
     }
 }

@@ -1,11 +1,9 @@
 package auth
 
 import TestDatabase
-import auth.data.Users
-import auth.data.auth
 import auth.domain.RawUser
+import auth.presentation.auth
 import body
-import core.db.dbModule
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
@@ -35,15 +33,16 @@ class EndpointsTest : TestDatabase(Users) {
             body(user)
         }
 
+    private val modules = arrayOf(dbModule, authModule, coreModule)
     @Test
-    fun signupTest() = testApp(Application::auth, dbModule) {
+    fun signupTest() = testApp(Application::auth, *modules) {
         val response = createUser()
         assertEquals(HttpStatusCode.Created, response.status)
         assertNotNull(response.bodyAsText().toLongOrNull())
     }
 
     @Test
-    fun signinTest() = testApp(Application::auth, dbModule) {
+    fun signinTest() = testApp(Application::auth, *modules) {
         createUser()
         val response = signIn()
         assertEquals(HttpStatusCode.OK, response.status)
@@ -51,7 +50,7 @@ class EndpointsTest : TestDatabase(Users) {
     }
 
     @Test
-    fun tokenValidTest() = testApp(Application::auth, dbModule) {
+    fun tokenValidTest() = testApp(Application::auth, *modules) {
         createUser()
         val token = signIn().bodyAsText()
         val response = client.get("/api/hello") {
@@ -62,7 +61,7 @@ class EndpointsTest : TestDatabase(Users) {
     }
 
     @Test
-    fun tokenInvalidTest() = testApp(Application::auth, dbModule) {
+    fun tokenInvalidTest() = testApp(Application::auth, *modules) {
         createUser()
         signIn()
         val response = client.get("/api/hello") {
@@ -72,7 +71,7 @@ class EndpointsTest : TestDatabase(Users) {
     }
 
     @Test
-    fun tokenExpiredTest() = testApp(Application::auth, dbModule) {
+    fun tokenExpiredTest() = testApp(Application::auth, *modules) {
         createUser()
         val token = signIn().bodyAsText()
         val response = client.get("/api/hello") {

@@ -1,6 +1,8 @@
 import io.ktor.client.request.*
 import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
+import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.testing.*
 import io.ktor.util.*
 import kotlinx.serialization.encodeToString
@@ -18,6 +20,9 @@ fun testApp(
         application {
             install(Koin) {
                 modules(*modules)
+            }
+            install(ContentNegotiation) {
+                json()
             }
             app()
         }

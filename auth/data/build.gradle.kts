@@ -10,6 +10,7 @@ configuration {
     external {
         +libs.bundles.ktor
         +libs.bundles.exposed
+        +libs.serialization
         +libs.koin.core
         +libs.koin.ktor
         +projects.core.db
@@ -19,9 +20,8 @@ configuration {
     }
     test {
         +projects.core.test
-        +libs.kotlin.test
-        +libs.kotlin.test.junit
-        +libs.ktor.test
+        +libs.bundles.test
+        +projects.core.data
     }
 }
 

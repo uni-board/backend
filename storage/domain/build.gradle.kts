@@ -5,8 +5,9 @@ plugins {
 
 configuration {
     internal {
-        +libs.koin.ktor
-        +libs.bundles.ktor
-        +projects.core.ktor
+    }
+    test {
+        +projects.core.test
+        +libs.bundles.test
     }
 }

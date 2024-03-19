@@ -9,17 +9,22 @@ import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
 
-
+private const val USERID_TAG = "userid"
 class TokenRepositoryImpl(private val usersRepository: UsersRepository) : TokenRepository {
     override suspend fun generateToken(userId: Long): String {
         return requireNotNull(
             JWT.create()
                 .withAudience(BuildConfig.SIGNIN_AUDIENCE)
                 .withIssuer(BuildConfig.SIGNIN_ISSUER)
-                .withClaim("userid", userId.toString())
+                .withClaim(USERID_TAG, userId.toString())
                 .withExpiresAt(java.util.Date(System.currentTimeMillis() + BuildConfig.SIGNIN_EXPIRATION_TIME))
                 .sign(Algorithm.HMAC256(BuildConfig.SIGNIN_SECRET))
         )
+    }
+
+    override fun tokenFromCall(call: ApplicationCall): Long? {
+        val principal = call.principal<JWTPrincipal>()
+        return principal?.payload?.getClaim(USERID_TAG)?.asString()?.toLong()
     }
 
     override fun Application.configure() {
@@ -33,7 +38,7 @@ class TokenRepositoryImpl(private val usersRepository: UsersRepository) : TokenR
                         .build()
                 )
                 validate { credential ->
-                    val id = credential.payload.getClaim("userid").asString().toLongOrNull()
+                    val id = credential.payload.getClaim(USERID_TAG).asString().toLongOrNull()
                     if (id != null && usersRepository.getById(id) != null)
                         JWTPrincipal(credential.payload)
                     else null

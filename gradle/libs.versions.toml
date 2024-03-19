@@ -58,6 +58,14 @@ exposed = [
     "exposed_datetime",
     "exposed_jdbc"
 ]
+test = [
+    "kotlin_test",
+    "ktor_test",
+    "kotlin_test_junit",
+    "junit",
+    "jupiter",
+    "mockk"
+]
 [plugins]
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
