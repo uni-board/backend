@@ -12,17 +12,9 @@ dependencyResolutionManagement {
     }
 }
 
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+//enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "backend"
 
-rootDir
-    .walk()
-    .filter {
-        it.name != "buildSrc" && it.name != "convention"
-                && it.isDirectory
-                && file("${it.absolutePath}/build.gradle.kts").exists()
-    }
-    .forEach {
-        val calculated = it.absolutePath.replace(rootDir.absolutePath, "").replace("/", ":")
-        include(calculated)
-    }
+include("storage:data")
+include("storage:domain")
+include("storage:presentation")

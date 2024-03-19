@@ -7,7 +7,6 @@ configuration {
     internal {
     }
     test {
-        +projects.core.test
         +libs.bundles.test
     }
 }
