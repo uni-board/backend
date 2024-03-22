@@ -17,10 +17,14 @@
           </compositeBuild>
         </compositeConfiguration>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="20" />
+        <option name="gradleJvm" value="corretto-20" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/board" />
+            <option value="$PROJECT_DIR$/board/data" />
+            <option value="$PROJECT_DIR$/board/domain" />
+            <option value="$PROJECT_DIR$/board/presentation" />
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/build-logic/convention" />
             <option value="$PROJECT_DIR$/storage" />

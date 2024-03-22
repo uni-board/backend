@@ -18,3 +18,7 @@ rootProject.name = "backend"
 include("storage:data")
 include("storage:domain")
 include("storage:presentation")
+
+include("board:data")
+include("board:domain")
+include("board:presentation")

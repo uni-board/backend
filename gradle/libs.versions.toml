@@ -9,6 +9,7 @@ kotlin = "1.9.22"
 buildconfig = "5.3.5"
 junit = "4.13.2"
 jupiter = "5.10.2"
+socketio = "4.0.1"
 
 [libraries]
 ktor_core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
@@ -20,6 +21,10 @@ ktor_netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
 ktor_auth = { module = "io.ktor:ktor-server-auth", version.ref = "ktor" }
 ktor_auth_jwt = { module = "io.ktor:ktor-server-auth-jwt", version.ref = "ktor" }
 ktor_test = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }
+ktor_websockets = { module = "io.ktor:ktor-server-websockets", version.ref = "ktor" }
+
+socketio = { module = "io.socket:socket.io-server", version.ref = "socketio" }
+javax_servlet = {module = "javax.servlet:javax.servlet-api", version.ref = "socketio"}
 
 exposed_core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed" }
 exposed_crypt = { module = "org.jetbrains.exposed:exposed-crypt", version.ref = "exposed" }
@@ -31,13 +36,13 @@ serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", v
 koin_core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin_ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin" }
 
-kotlin_gradle = {module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin"}
+kotlin_gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
 h2db = { module = "com.h2database:h2", version.ref = "h2db" }
 
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 kotlin_test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-kotlin_test_junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin"}
+kotlin_test_junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { module = "junit:junit", version.ref = "junit" }
 jupiter = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jupiter" }
 [bundles]

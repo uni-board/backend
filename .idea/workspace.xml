@@ -5,12 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d2972c1-98b2-4ad6-b7f2-42f127e204b2" name="Changes" comment="Init">
-      <change afterPath="$PROJECT_DIR$/storage/data/src/main/java/com/uniboard/backend/data/StorageRepositoryImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/domain/src/main/java/com/uniboard/backend/domain/StorageDB.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/domain/src/main/java/com/uniboard/backend/domain/StorageRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/board/data/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/board/domain/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/board/domain/src/main/kotlin/com/uniboard/board/domain/AllBoardsRepository.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/board/domain/src/main/kotlin/com/uniboard/board/domain/BoardRepository.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/board/presentation/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/board/presentation/src/main/kotlin/com/uniboard/board/presentation/Board.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/board/presentation/src/main/kotlin/com/uniboard/board/presentation/socket/Sockets.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/board/presentation/src/main/kotlin/com/uniboard/board/presentation/socket/dsl/Sockets.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/data/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/storage/data/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/libs.versions.toml" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/libs.versions.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,9 +52,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Data Class" />
+        <option value="Interface" />
         <option value="Kotlin Interface" />
         <option value="Kotlin Class" />
-        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -84,10 +90,11 @@
     &quot;Kotlin.ApplicationKt (1).executor&quot;: &quot;Run&quot;,
     &quot;Kotlin.ApplicationKt.executor&quot;: &quot;Run&quot;,
     &quot;Kotlin.MainKt.executor&quot;: &quot;Run&quot;,
+    &quot;Kotlin.SocketsKt.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature-storage&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature-board&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;21&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/renattele/IdeaProjects/backend/storage/data&quot;,
@@ -118,7 +125,7 @@
       <recent name="core.crypt.impl" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.UsersRepositoryImplTest">
+  <component name="RunManager" selected="Kotlin.SocketsKt">
     <configuration name="EndpointsTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -167,8 +174,16 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="SocketsKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.uniboard.board.presentation.socket.SocketsKt" />
+      <module name="backend.board.presentation.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Kotlin.SocketsKt" />
         <item itemvalue="Gradle.UsersRepositoryImplTest" />
         <item itemvalue="Gradle.EndpointsTest" />
       </list>
