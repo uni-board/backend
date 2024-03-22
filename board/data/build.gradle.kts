@@ -5,6 +5,7 @@ plugins {
 
 configuration {
     internal {
+        +project(":board:domain")
     }
     test {
         +libs.bundles.test
