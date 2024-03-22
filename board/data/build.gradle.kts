@@ -6,6 +6,7 @@ plugins {
 configuration {
     internal {
         +project(":board:domain")
+        +libs.mongodb
     }
     test {
         +libs.bundles.test

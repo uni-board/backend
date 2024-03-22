@@ -10,6 +10,7 @@ buildconfig = "5.3.5"
 junit = "4.13.2"
 jupiter = "5.10.2"
 socketio = "4.0.1"
+mongodb = "5.0.0"
 
 [libraries]
 ktor_core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
@@ -24,21 +25,15 @@ ktor_test = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }
 ktor_websockets = { module = "io.ktor:ktor-server-websockets", version.ref = "ktor" }
 
 socketio = { module = "io.socket:socket.io-server", version.ref = "socketio" }
-javax_servlet = {module = "javax.servlet:javax.servlet-api", version.ref = "socketio"}
+javax_servlet = { module = "javax.servlet:javax.servlet-api", version.ref = "socketio" }
 
-exposed_core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed" }
-exposed_crypt = { module = "org.jetbrains.exposed:exposed-crypt", version.ref = "exposed" }
-exposed_dao = { module = "org.jetbrains.exposed:exposed-dao", version.ref = "exposed" }
-exposed_jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }
-exposed_datetime = { module = "org.jetbrains.exposed:exposed-kotlin-datetime", version.ref = "exposed" }
+mongodb = { module = "org.mongodb:mongodb-driver-sync", version.ref = "mongodb" }
 
 serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
 koin_core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin_ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin" }
 
 kotlin_gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-
-h2db = { module = "com.h2database:h2", version.ref = "h2db" }
 
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 kotlin_test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -55,13 +50,6 @@ ktor = [
     "ktor_netty",
     "ktor_pages",
     "ktor_serialization"
-]
-exposed = [
-    "exposed_core",
-    "exposed_crypt",
-    "exposed_dao",
-    "exposed_datetime",
-    "exposed_jdbc"
 ]
 test = [
     "kotlin_test",
