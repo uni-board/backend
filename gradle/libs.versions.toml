@@ -63,3 +63,4 @@ kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 buildconfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildconfig" }
 configuration = { id = "configuration", version = "unspecified" }
+ktor = {id = "io.ktor.plugin", version.ref = "ktor"}
