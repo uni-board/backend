@@ -24,8 +24,9 @@ jobs:
         with:
           distribution: 'oracle'
           java-version: '17'
+
       - name: Build and publish image
-        with:
+        env:
           USERNAME: ${{ github.actor }}
           PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: |
