@@ -50,5 +50,13 @@ ktor {
                 DockerPortMappingProtocol.TCP
             )
         )
+
+        externalRegistry = DockerImageRegistry.externalRegistry(
+            username = provider { System.getenv("USERNAME") },
+            password = provider { System.getenv("PASSWORD") },
+            project = provider { "backend" },
+            hostname = provider { "ghcr.io" },
+            namespace = provider { "uni-board" }
+        )
     }
 }

@@ -1,0 +1,20 @@
+name: Push image to ghcr.io
+
+on:
+  push:
+    branches:
+      - app
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build and publish image
+        env:
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ./gradlew :app:publishImage
