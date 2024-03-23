@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 fun Project.setupKotlin() {
     tasks.withType(KotlinCompile::class.java) {
         kotlinOptions.apply {
-            jvmTarget = "20"
+            jvmTarget = "17"
             experimentalContextReceivers()
         }
     }

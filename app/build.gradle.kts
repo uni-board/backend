@@ -39,7 +39,7 @@ buildConfig {
 
 ktor {
     docker {
-        jreVersion = JavaVersion.VERSION_20
+        jreVersion = JavaVersion.VERSION_17
         localImageName = "uniboard-backend"
         imageTag = "0.0.1-SNAPSHOT"
 
