@@ -54,9 +54,9 @@ ktor {
         externalRegistry = DockerImageRegistry.externalRegistry(
             username = provider { System.getenv("USERNAME") },
             password = provider { System.getenv("PASSWORD") },
-            project = provider { "backend" },
-            hostname = provider { "ghcr.io" },
-            namespace = provider { "uni-board" }
+            project = provider { System.getenv("IMAGE_NAME") },
+            hostname = provider { System.getenv("REGISTRY") },
+            namespace = provider { System.getenv("NAMESPACE")}
         )
     }
 }

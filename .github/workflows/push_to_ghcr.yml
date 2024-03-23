@@ -5,6 +5,10 @@ on:
     branches:
       - app
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+  NAMESPACE: uni-board
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
@@ -18,7 +22,7 @@ jobs:
           java-version: '17'
       - name: Build and publish image
         env:
-          USERNAME: ${{ secrets.USERNAME }}
+          USERNAME: ${{ github.actor }}
           PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ./gradlew :app:publishImage
