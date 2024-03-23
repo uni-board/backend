@@ -22,3 +22,5 @@ include("storage:presentation")
 include("board:data")
 include("board:domain")
 include("board:presentation")
+
+include("app")

@@ -5,6 +5,7 @@ plugins {
 
 configuration {
     internal {
+        +libs.serialization
     }
     test {
         +libs.bundles.test

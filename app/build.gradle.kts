@@ -9,25 +9,14 @@ plugins {
 
 configuration {
     internal {
-        +projects.core.data
-        +projects.core.domain
-        +projects.core.ktor
-        +projects.core.db
+        +project(":board:presentation")
+        +project(":board:data")
 
-        +projects.auth.data
-
-        +libs.bundles.ktor
-        +libs.bundles.exposed
-        +libs.koin.core
-        +libs.koin.ktor
-        +libs.h2db
-        +libs.serialization
+        +project(":storage:presentation")
+        +project(":storage:data")
     }
     test {
-        +libs.ktor.test
-        +libs.kotlin.test
-        +libs.kotlin.test.junit
-        +projects.core.test
+
     }
 }
 

@@ -10,6 +10,7 @@ configuration {
         +libs.bundles.ktor
         +libs.socketio
         +libs.javax.servlet
+        +libs.koin.ktor
     }
     test {
         +libs.bundles.test
