@@ -14,6 +14,12 @@ configuration {
 
         +project(":storage:presentation")
         +project(":storage:data")
+        +libs.bundles.ktor
+        +libs.koin.core
+        +libs.koin.ktor
+
+        +libs.slf4j.api
+        +libs.slf4j.simple
     }
     test {
 

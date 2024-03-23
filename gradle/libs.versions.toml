@@ -11,6 +11,7 @@ junit = "4.13.2"
 jupiter = "5.10.2"
 socketio = "4.0.1"
 mongodb = "5.0.0"
+slf4j = "2.0.12"
 
 [libraries]
 ktor_core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
@@ -19,10 +20,10 @@ ktor_serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", versi
 ktor_logging = { module = "io.ktor:ktor-server-call-logging", version.ref = "ktor" }
 ktor_pages = { module = "io.ktor:ktor-server-status-pages", version.ref = "ktor" }
 ktor_netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
-ktor_auth = { module = "io.ktor:ktor-server-auth", version.ref = "ktor" }
-ktor_auth_jwt = { module = "io.ktor:ktor-server-auth-jwt", version.ref = "ktor" }
 ktor_test = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }
-ktor_websockets = { module = "io.ktor:ktor-server-websockets", version.ref = "ktor" }
+
+slf4j_simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j" }
+slf4j_api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
 
 socketio = { module = "io.socket:socket.io-server", version.ref = "socketio" }
 javax_servlet = { module = "javax.servlet:javax.servlet-api", version.ref = "socketio" }
@@ -43,8 +44,6 @@ jupiter = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "jupit
 [bundles]
 ktor = [
     "ktor_core",
-    "ktor_auth",
-    "ktor_auth_jwt",
     "ktor_logging",
     "ktor_negotiation",
     "ktor_netty",

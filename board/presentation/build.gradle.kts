@@ -6,7 +6,6 @@ plugins {
 configuration {
     internal {
         +project(":board:domain")
-        +libs.ktor.websockets
         +libs.bundles.ktor
         +libs.socketio
         +libs.javax.servlet
