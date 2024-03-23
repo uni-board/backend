@@ -12,11 +12,8 @@ env:
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
-
     permissions:
-      contents: read
       packages: write
-
     steps:
       - uses: actions/checkout@v3
 
@@ -27,7 +24,7 @@ jobs:
 
       - name: Build and publish image
         env:
-          USERNAME: ${{ github.actor }}
+          USERNAME: ${{ github.repository_owner }}
           PASSWORD: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ./gradlew :app:publishImage
