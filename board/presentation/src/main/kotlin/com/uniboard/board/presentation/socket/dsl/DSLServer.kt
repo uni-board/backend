@@ -23,7 +23,7 @@ internal class DSLServer(
 
     override val currentRoom: SendServer?
         get() {
-            val roomName = client.allRooms?.singleOrNull() ?: return null
+            val roomName = client.allRooms?.singleOrNull { it.isNotBlank() } ?: return null
             return room(roomName)
         }
 }

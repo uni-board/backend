@@ -41,12 +41,18 @@ fun CoroutineScope.boardSocketServer() {
         }
         listen("created") { data ->
             val room = requireRoomNotNull()
+            // TODO: Add db handling
+            room.send("created", data)
         }
         listen("modified") { data ->
-
+            val room = requireRoomNotNull()
+            // TODO: Add db handling
+            room.send("modified", data)
         }
         listen("deleted") { data ->
-
+            val room = requireRoomNotNull()
+            // TODO: Add db handling
+            room.send("deleted", data)
         }
     }
 }

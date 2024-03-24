@@ -48,6 +48,11 @@ ktor {
                 80,
                 8080,
                 DockerPortMappingProtocol.TCP
+            ),
+            DockerPortMapping(
+                81,
+                8081,
+                DockerPortMappingProtocol.TCP
             )
         )
 
