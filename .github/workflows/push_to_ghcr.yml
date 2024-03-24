@@ -3,7 +3,8 @@ name: Push image to ghcr.io
 on:
   push:
     branches:
-      - app
+      - staging
+      - master
 
 env:
   REGISTRY: ghcr.io
