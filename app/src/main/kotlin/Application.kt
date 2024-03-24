@@ -1,4 +1,5 @@
 import com.uniboard.board.presentation.board
+import com.uniboard.board.presentation.boardSocketServer
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -10,6 +11,8 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.util.logging.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.json.Json
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
@@ -23,6 +26,9 @@ fun main() {
     startKoin {
         modules(modules)
     }
+    val coroutineScope = CoroutineScope(Dispatchers.IO)
+    coroutineScope.boardSocketServer()
+
     embeddedServer(Netty, port = 8080) {
         main()
     }.start(wait = true)

@@ -9,7 +9,7 @@ kotlin = "1.9.22"
 buildconfig = "5.3.5"
 junit = "4.13.2"
 jupiter = "5.10.2"
-socketio = "4.0.1"
+socketio = "2.0.9"
 mongodb = "5.0.0"
 slf4j = "2.0.12"
 
@@ -25,8 +25,7 @@ ktor_test = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }
 slf4j_simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j" }
 slf4j_api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
 
-socketio = { module = "io.socket:socket.io-server", version.ref = "socketio" }
-javax_servlet = { module = "javax.servlet:javax.servlet-api", version.ref = "socketio" }
+socketio = { module = "com.corundumstudio.socketio:netty-socketio", version.ref = "socketio" }
 
 mongodb = { module = "org.mongodb:mongodb-driver-sync", version.ref = "mongodb" }
 

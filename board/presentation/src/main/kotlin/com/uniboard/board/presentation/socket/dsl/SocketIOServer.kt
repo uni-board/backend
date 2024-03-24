@@ -1,5 +1,3 @@
 package com.uniboard.board.presentation.socket.dsl
 
-interface Sockets {
-
-}
+interface SocketIOServer : RoomServer, SendServer

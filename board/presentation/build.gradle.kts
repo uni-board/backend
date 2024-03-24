@@ -8,7 +8,6 @@ configuration {
         +project(":board:domain")
         +libs.bundles.ktor
         +libs.socketio
-        +libs.javax.servlet
         +libs.koin.ktor
     }
     test {
