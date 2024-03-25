@@ -7,6 +7,8 @@ configuration {
     internal {
         +project(":board:domain")
         +libs.mongodb
+
+        +libs.koin.core
     }
     test {
         +libs.bundles.test
