@@ -5,5 +5,5 @@ interface StorageDB {
 
     fun fileExists(boardId: Long, id: Long): Boolean
 
-    fun delete(id: Long)
+    fun delete(boardId: Long, id: Long)
 }
