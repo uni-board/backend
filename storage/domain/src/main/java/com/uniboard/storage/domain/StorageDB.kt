@@ -1,4 +1,4 @@
-package com.uniboard.backend.domain
+package com.uniboard.storage.domain
 
 interface StorageDB {
     fun add(boardId: Long): Long

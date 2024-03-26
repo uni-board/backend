@@ -1,6 +1,6 @@
-package com.uniboard.backend.data
+package com.uniboard.storage.data
 
-import com.uniboard.backend.domain.StorageDB
+import com.uniboard.storage.domain.StorageDB
 
 class StorageDBInMemory: StorageDB {
     private val files = mutableMapOf<Long, MutableSet<Long>>()
