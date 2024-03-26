@@ -1,7 +1,6 @@
 package com.uniboard.board.presentation.socket.dsl
 
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.awaitCancellation
 
 interface SendServer {
     @SocketIODSL

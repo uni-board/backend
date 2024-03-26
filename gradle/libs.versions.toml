@@ -21,6 +21,7 @@ ktor_logging = { module = "io.ktor:ktor-server-call-logging", version.ref = "kto
 ktor_pages = { module = "io.ktor:ktor-server-status-pages", version.ref = "ktor" }
 ktor_netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
 ktor_test = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }
+ktor_cors = { module = "io.ktor:ktor-server-cors", version.ref = "ktor" }
 
 slf4j_simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j" }
 slf4j_api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
@@ -62,4 +63,4 @@ kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 buildconfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildconfig" }
 configuration = { id = "configuration", version = "unspecified" }
-ktor = {id = "io.ktor.plugin", version.ref = "ktor"}
+ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
