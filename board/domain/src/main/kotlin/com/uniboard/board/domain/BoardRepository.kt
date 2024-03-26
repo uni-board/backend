@@ -3,11 +3,11 @@ package com.uniboard.board.domain
 interface BoardRepository {
     fun all(boardId: Long): List<BoardObject>
 
-    fun get(boardId: Long, id: Long): String
+    fun get(boardId: Long, id: String): String
 
-    fun add(boardId: Long, data: String): Long
+    fun add(boardId: Long, element: BoardObject)
 
-    fun delete(boardId: Long, id: Long)
+    fun delete(boardId: Long, id: String)
 
-    fun set(boardId: Long, id: Long, data: String)
+    fun set(boardId: Long, element: BoardObject)
 }

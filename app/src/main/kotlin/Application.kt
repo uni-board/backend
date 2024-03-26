@@ -1,3 +1,4 @@
+import com.uniboard.board.data.boardModule
 import com.uniboard.board.presentation.board
 import com.uniboard.board.presentation.boardSocketServer
 import io.ktor.serialization.kotlinx.json.*
@@ -11,6 +12,7 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.util.logging.*
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.json.Json
@@ -19,14 +21,17 @@ import org.koin.core.module.Module
 import org.koin.ktor.plugin.Koin
 import org.slf4j.event.Level
 
-private val modules = listOf<Module>(
+private val modules = listOf(
+    boardModule
 )
 
 fun main() {
     startKoin {
         modules(modules)
     }
-    val coroutineScope = CoroutineScope(Dispatchers.IO)
+    val coroutineScope = CoroutineScope(Dispatchers.IO + CoroutineExceptionHandler { coroutineContext, throwable ->
+        throwable.printStackTrace()
+    })
     coroutineScope.boardSocketServer()
 
     embeddedServer(Netty, port = 8080) {

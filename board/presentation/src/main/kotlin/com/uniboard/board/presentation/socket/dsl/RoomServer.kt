@@ -5,16 +5,16 @@ interface RoomServer {
     suspend fun join(room: String)
 
     @SocketIODSL
-    fun room(name: String): SendServer
+    fun room(name: String): Room
 
     @SocketIODSL
-    val currentRoom: SendServer?
+    val currentRoom: Room?
 }
 
 @SocketIODSL
 suspend fun <T> T.requireRoomNotNull(
     errorEvent: String = "error",
     message: () -> String = { "Client is not connected to any room" }
-): SendServer where T : RoomServer, T : SendServer {
+): Room where T : RoomServer, T : SendServer {
     return currentRoom ?: sendAndFinish(errorEvent, message())
 }

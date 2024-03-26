@@ -4,34 +4,31 @@ import com.uniboard.board.domain.BoardObject
 import com.uniboard.board.domain.BoardRepository
 
 class BoardRepositoryInMemory : BoardRepository {
-    private val boards = mutableMapOf<Long, MutableList<BoardObject>>()
+    private val boards = mutableMapOf<Long, MutableMap<String, BoardObject>>()
     override fun all(boardId: Long): List<BoardObject> {
-        return boards[boardId] ?: emptyList()
+        return boards[boardId]?.values?.toList() ?: emptyList()
     }
 
     private fun objects(boardId: Long) = boards.getOrPut(boardId) {
-        mutableListOf()
+        mutableMapOf()
     }
 
-    override fun get(boardId: Long, id: Long): String {
-        return boards[boardId]?.find { it.id == id }?.state ?: ""
+    override fun get(boardId: Long, id: String): String {
+        return boards[boardId]?.get(id)?.state ?: ""
     }
 
-    override fun add(boardId: Long, data: String): Long {
+    override fun add(boardId: Long, element: BoardObject) {
         val objects = objects(boardId)
-        val lastId = objects.lastOrNull()?.id ?: -1
-        objects.add(BoardObject(lastId + 1, data))
-        return lastId + 1
+        objects[element.id] = element
     }
 
-    override fun delete(boardId: Long, id: Long) {
-        objects(boardId).removeAll { it.id == id }
+    override fun delete(boardId: Long, id: String) {
+        println(objects(boardId))
+        objects(boardId).remove(id)
     }
 
-    override fun set(boardId: Long, id: Long, data: String) {
-        objects(boardId).replaceAll { element ->
-            if (element.id == id) element.copy(state = data)
-            else element
-        }
+    override fun set(boardId: Long, element: BoardObject) {
+        println(objects(boardId))
+        objects(boardId)[element.id] = element
     }
 }

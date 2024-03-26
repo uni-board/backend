@@ -16,17 +16,20 @@ internal class DSLServer(
         client.joinRoom(room)
     }
 
-    override fun room(name: String): SendServer {
+    override fun room(name: String): Room {
         val operations = server.getRoomOperations(name)
-        return operations.sendServer(client)
+        return object : Room, SendServer by operations.sendServer(client) {
+            override val id: String = name
+        }
     }
 
-    override val currentRoom: SendServer?
+    override val currentRoom: Room?
         get() {
             val roomName = client.allRooms?.singleOrNull { it.isNotBlank() } ?: return null
             return room(roomName)
         }
 }
+
 @SocketIODSL
 private fun BroadcastOperations.sendServer(client: SocketIOClient) = object : SendServer {
     override suspend fun send(event: String, data: String) {
