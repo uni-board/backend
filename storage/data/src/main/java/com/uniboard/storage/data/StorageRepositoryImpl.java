@@ -14,8 +14,9 @@ public class StorageRepositoryImpl implements StorageRepository {
     private final String PATH;
 
     public StorageRepositoryImpl(StorageDB db) {
-        PATH = new File(".").getAbsolutePath() + "/storage";
-        System.out.println(PATH);
+        var dir = new File("/storage");
+        dir.mkdir();
+        PATH = dir.getAbsolutePath();
         this.db = db;
     }
 
