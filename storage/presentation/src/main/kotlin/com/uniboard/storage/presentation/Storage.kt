@@ -21,7 +21,8 @@ fun Application.storage() {
                 data.forEachPart { part ->
                     if (part is PartData.FileItem) {
                         val id = storageRepository.put(part.streamProvider())
-                        call.respond(mapOf("id" to id))
+                        // TODO: Set correct url
+                        call.respond(AddFileResponse(id, "http://1.2.3.4/storage/$id"))
                     }
                 }
             }
