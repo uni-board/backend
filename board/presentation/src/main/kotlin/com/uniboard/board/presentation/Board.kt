@@ -27,7 +27,7 @@ fun Application.board() {
         }
         get("/board/{id}/get") {
             val id = call.parameters["id"]?.toLongOrNull()
-            if (id == null) {
+            if (id == null || !allboards.exists(id)) {
                 call.respond(HttpStatusCode.BadRequest)
                 return@get
             }
