@@ -2,6 +2,8 @@ import com.uniboard.board.data.boardModule
 import com.uniboard.board.presentation.board
 import com.uniboard.board.presentation.boardSocketServer
 import com.uniboard.core.data.coreModule
+import com.uniboard.core.domain.LogLevel
+import com.uniboard.core.domain.Logger
 import com.uniboard.storage.data.storageModule
 import com.uniboard.storage.presentation.storage
 import io.ktor.http.*
@@ -23,6 +25,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.json.Json
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
+import org.koin.ktor.ext.inject
 import org.koin.ktor.plugin.Koin
 import org.slf4j.event.Level
 
@@ -36,10 +39,6 @@ fun main() {
     startKoin {
         modules(modules)
     }
-    val coroutineScope = CoroutineScope(Dispatchers.IO + CoroutineExceptionHandler { coroutineContext, throwable ->
-        throwable.printStackTrace()
-    })
-    coroutineScope.boardSocketServer()
 
     embeddedServer(Netty, port = 8080) {
         main()
@@ -68,12 +67,13 @@ private fun Application.installPlugins() {
         }
     }
     install(CallLogging) {
-        logger = KtorSimpleLogger("Backend")
         level = Level.INFO
     }
     install(CORS) {
         anyHost()
     }
+    val coroutineScope by inject<CoroutineScope>()
+    coroutineScope.boardSocketServer()
 
     routing {
         get("hello") {

@@ -12,6 +12,8 @@ jupiter = "5.10.2"
 socketio = "2.0.9"
 mongodb = "5.0.0"
 slf4j = "2.0.12"
+csv = "1.9.3"
+coroutines = "1.8.0"
 
 [libraries]
 ktor_core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
@@ -23,6 +25,7 @@ ktor_netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
 ktor_test = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }
 ktor_cors = { module = "io.ktor:ktor-server-cors", version.ref = "ktor" }
 
+csv = {module = "com.github.doyaaaaaken:kotlin-csv-jvm", version.ref = "csv" }
 slf4j_simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j" }
 slf4j_api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
 
@@ -35,6 +38,7 @@ koin_core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin_ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin" }
 
 kotlin_gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+coroutines =  {module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref =  "coroutines"}
 
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 kotlin_test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
