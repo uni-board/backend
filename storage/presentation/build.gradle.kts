@@ -5,6 +5,10 @@ plugins {
 
 configuration {
     internal {
+        +libs.bundles.ktor
+        +libs.koin.core
+        +libs.koin.ktor
+        +project(":storage:domain")
     }
     test {
         +libs.bundles.test

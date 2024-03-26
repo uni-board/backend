@@ -1,6 +1,8 @@
 import com.uniboard.board.data.boardModule
 import com.uniboard.board.presentation.board
 import com.uniboard.board.presentation.boardSocketServer
+import com.uniboard.storage.data.storageModule
+import com.uniboard.storage.presentation.storage
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
@@ -24,7 +26,8 @@ import org.koin.ktor.plugin.Koin
 import org.slf4j.event.Level
 
 private val modules = listOf(
-    boardModule
+    boardModule,
+    storageModule
 )
 
 fun main() {
@@ -44,6 +47,7 @@ fun main() {
 fun Application.main() {
     installPlugins()
     board()
+    storage()
 }
 
 private fun Application.installPlugins() {

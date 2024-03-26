@@ -11,17 +11,18 @@ import java.nio.file.Path;
 public class StorageRepositoryImpl implements StorageRepository {
 
     private final StorageDB db;
-    private final String PATH = null;
+    private final String PATH;
 
     public StorageRepositoryImpl(StorageDB db) {
+        PATH = new File(".").getAbsolutePath() + "/storage";
         this.db = db;
     }
 
     @Override
-    public long put(long boardId, @NotNull InputStream stream) {
-        long id = db.add(boardId);
+    public long put(@NotNull InputStream stream) {
+        long id = db.add();
         try {
-            Files.copy(stream, Path.of(PATH + "/" + boardId + "/" + id));
+            Files.copy(stream, Path.of(PATH + "/" + id));
         } catch (IOException e) {
             // TODO: Add logging
         }
@@ -30,15 +31,20 @@ public class StorageRepositoryImpl implements StorageRepository {
 
     @NotNull
     @Override
-    public InputStream get(long boardId, long id) {
-        boolean exists = db.fileExists(boardId, id);
+    public InputStream get(long id) {
+        boolean exists = db.fileExists(id);
         if (exists) {
             try {
-                return new FileInputStream(PATH + "/" + boardId + "/" + id);
+                return new FileInputStream(PATH + "/" + id);
             } catch (FileNotFoundException e) {
                 // TODO: Add logging
             }
         }
         return InputStream.nullInputStream();
+    }
+
+    @Override
+    public boolean fileExists(long id) {
+        return db.fileExists(id);
     }
 }
