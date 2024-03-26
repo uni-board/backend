@@ -31,7 +31,8 @@ fun Application.board() {
                 call.respond(HttpStatusCode.BadRequest)
                 return@get
             }
-            call.respond(boardRepository.all(id).map { it.state }.toString().decoded)
+            val elements = boardRepository.all(id)
+            call.respond(elements.map { it.state }.toString().decoded)
         }
     }
 }

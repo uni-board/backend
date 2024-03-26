@@ -1,6 +1,7 @@
 package com.uniboard.board.presentation.socket
 
 import com.corundumstudio.socketio.Configuration
+import com.corundumstudio.socketio.SocketConfig
 import com.uniboard.board.presentation.socket.dsl.DSLServer
 import com.uniboard.board.presentation.socket.dsl.SocketIO
 import com.uniboard.board.presentation.socket.dsl.SocketIODSL
@@ -15,7 +16,7 @@ private class Listener(
 )
 
 @SocketIODSL
-fun CoroutineScope.sockets(configure: SocketIO.() -> Unit) {
+fun CoroutineScope.sockets(port: Int = 8081, configure: SocketIO.() -> Unit) {
     val listeners = mutableListOf<Listener>()
     val exceptionHandlers = mutableListOf<SocketIOServer.(Throwable) -> Unit>()
     object : SocketIO {
@@ -35,7 +36,7 @@ fun CoroutineScope.sockets(configure: SocketIO.() -> Unit) {
     }
 
     val config = Configuration().apply {
-        port = 8081
+        this.port = port
     }
 
     val server = com.corundumstudio.socketio.SocketIOServer(config)

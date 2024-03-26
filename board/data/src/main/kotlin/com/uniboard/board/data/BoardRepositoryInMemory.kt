@@ -23,12 +23,10 @@ class BoardRepositoryInMemory : BoardRepository {
     }
 
     override fun delete(boardId: Long, id: String) {
-        println(objects(boardId))
         objects(boardId).remove(id)
     }
 
     override fun set(boardId: Long, element: BoardObject) {
-        println(objects(boardId))
         objects(boardId)[element.id] = element
     }
 }
