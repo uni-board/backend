@@ -18,6 +18,7 @@ configuration {
         +libs.bundles.ktor
         +libs.koin.core
         +libs.koin.ktor
+        +libs.ktor.cors
 
         +libs.slf4j.api
         +libs.slf4j.simple
