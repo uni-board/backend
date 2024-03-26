@@ -2,6 +2,7 @@ package com.uniboard.backend.data;
 
 import com.uniboard.backend.domain.StorageDB;
 import com.uniboard.backend.domain.StorageRepository;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -17,7 +18,7 @@ public class StorageRepositoryImpl implements StorageRepository {
     }
 
     @Override
-    public long put(long boardId, InputStream stream) {
+    public long put(long boardId, @NotNull InputStream stream) {
         long id = db.add(boardId);
         try {
             Files.copy(stream, Path.of(PATH + "/" + boardId + "/" + id));
@@ -27,6 +28,7 @@ public class StorageRepositoryImpl implements StorageRepository {
         return id;
     }
 
+    @NotNull
     @Override
     public InputStream get(long boardId, long id) {
         boolean exists = db.fileExists(boardId, id);

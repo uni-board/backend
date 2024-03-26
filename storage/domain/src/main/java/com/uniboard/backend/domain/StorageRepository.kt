@@ -1,10 +1,9 @@
-package com.uniboard.backend.domain;
+package com.uniboard.backend.domain
 
-import java.io.InputStream;
+import java.io.InputStream
 
-public interface StorageRepository {
-    long put(long boardId, InputStream stream);
+interface StorageRepository {
+    fun put(boardId: Long, stream: InputStream): Long
 
-    InputStream get(long boardId, long id);
-
+    fun get(boardId: Long, id: Long): InputStream
 }

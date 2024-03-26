@@ -1,8 +1,9 @@
-package com.uniboard.backend.domain;
+package com.uniboard.backend.domain
 
-public interface StorageDB {
-    long add(long boardId);
+interface StorageDB {
+    fun add(boardId: Long): Long
 
-    boolean fileExists(long boardId, long id);
-    void delete(long id);
+    fun fileExists(boardId: Long, id: Long): Boolean
+
+    fun delete(id: Long)
 }
