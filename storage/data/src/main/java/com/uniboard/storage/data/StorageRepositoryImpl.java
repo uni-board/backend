@@ -1,5 +1,6 @@
 package com.uniboard.storage.data;
 
+import com.uniboard.core.domain.BuildConfig;
 import com.uniboard.storage.domain.StorageDB;
 import com.uniboard.storage.domain.StorageRepository;
 import org.jetbrains.annotations.NotNull;
@@ -13,10 +14,11 @@ public class StorageRepositoryImpl implements StorageRepository {
     private final StorageDB db;
     private final String PATH;
 
-    public StorageRepositoryImpl(StorageDB db) {
-        var dir = new File("/storage");
-        dir.mkdir();
+    public StorageRepositoryImpl(StorageDB db, BuildConfig config) {
+        var dir = new File(config.getWORKDIR(), "storage");
+        dir.mkdirs();
         PATH = dir.getAbsolutePath();
+        System.out.println(PATH);
         this.db = db;
     }
 

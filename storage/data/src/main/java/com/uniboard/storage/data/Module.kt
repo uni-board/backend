@@ -6,5 +6,5 @@ import org.koin.dsl.module
 
 val storageModule = module {
     single<StorageDB> { StorageDBInMemory() }
-    single<StorageRepository> { StorageRepositoryImpl(get()) }
+    single<StorageRepository> { StorageRepositoryImpl(get(), get()) }
 }

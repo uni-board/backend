@@ -6,6 +6,7 @@ plugins {
 configuration {
     internal {
         +project(":storage:domain")
+        +project(":core:domain")
         +libs.koin.core
     }
     test {
