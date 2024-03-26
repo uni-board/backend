@@ -10,6 +10,11 @@ class AllBoardsRepositoryInMemory: AllBoardsRepository {
         return lastId + 1
     }
 
+    override fun exists(id: Long): Boolean {
+        return id in boards
+    }
+
+
     override fun delete(id: Long) {
         boards.remove(id)
     }

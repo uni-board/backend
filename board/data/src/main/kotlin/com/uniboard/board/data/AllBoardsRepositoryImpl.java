@@ -12,4 +12,9 @@ public class AllBoardsRepositoryImpl implements AllBoardsRepository {
     public void delete(long id) {
 
     }
+
+    @Override
+    public boolean exists(long id) {
+        return false;
+    }
 }
