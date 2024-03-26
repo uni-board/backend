@@ -1,0 +1,31 @@
+name: Push image to ghcr.io
+
+on:
+  push:
+    branches:
+      - staging
+      - master
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: backend
+  NAMESPACE: uni-board
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'oracle'
+          java-version: '17'
+
+      - name: Build and publish image
+        env:
+          USERNAME: ${{ secrets.GHCR_USERNAME }}
+          PASSWORD: ${{ secrets.GHCR_TOKEN }}
+        run: |
+          ./gradlew :app:publishImage

@@ -1,33 +1,29 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.util.Properties
+import io.ktor.plugin.features.*
+import java.util.*
 
 plugins {
     alias(libs.plugins.configuration)
     alias(libs.plugins.serialization)
     alias(libs.plugins.buildconfig)
+    alias(libs.plugins.ktor)
 }
 
 configuration {
     internal {
-        +projects.core.data
-        +projects.core.domain
-        +projects.core.ktor
-        +projects.core.db
+        +project(":board:presentation")
+        +project(":board:data")
 
-        +projects.auth.data
-
+        +project(":storage:presentation")
+        +project(":storage:data")
         +libs.bundles.ktor
-        +libs.bundles.exposed
         +libs.koin.core
         +libs.koin.ktor
-        +libs.h2db
-        +libs.serialization
+
+        +libs.slf4j.api
+        +libs.slf4j.simple
     }
     test {
-        +libs.ktor.test
-        +libs.kotlin.test
-        +libs.kotlin.test.junit
-        +projects.core.test
+
     }
 }
 
@@ -39,4 +35,33 @@ buildConfig {
     buildConfigField("SIGNIN_ISSUER", properties.getProperty("SIGNIN_ISSUER"))
     buildConfigField("SIGNIN_EXPIRATION_TIME", properties.getProperty("SIGNIN_EXPIRATION_TIME").toLong())
     buildConfigField("SIGNIN_SECRET", properties.getProperty("SIGNIN_SECRET"))
+}
+
+ktor {
+    docker {
+        jreVersion = JavaVersion.VERSION_17
+        localImageName = "uniboard-backend"
+        imageTag = "0.0.1-SNAPSHOT"
+
+        portMappings = listOf(
+            DockerPortMapping(
+                80,
+                8080,
+                DockerPortMappingProtocol.TCP
+            ),
+            DockerPortMapping(
+                81,
+                8081,
+                DockerPortMappingProtocol.TCP
+            )
+        )
+
+        externalRegistry = DockerImageRegistry.externalRegistry(
+            username = provider { System.getenv("USERNAME") },
+            password = provider { System.getenv("PASSWORD") },
+            project = provider { System.getenv("IMAGE_NAME") },
+            hostname = provider { System.getenv("REGISTRY") },
+            namespace = provider { System.getenv("NAMESPACE")}
+        )
+    }
 }
