@@ -3,10 +3,7 @@ package com.uniboard.board.presentation
 import com.uniboard.board.domain.AllBoardsRepository
 import com.uniboard.board.domain.BoardObject
 import com.uniboard.board.domain.BoardRepository
-import com.uniboard.board.presentation.socket.dsl.Room
-import com.uniboard.board.presentation.socket.dsl.SocketIODSL
-import com.uniboard.board.presentation.socket.dsl.requireRoomNotNull
-import com.uniboard.board.presentation.socket.dsl.sendAndFinish
+import com.uniboard.board.presentation.socket.dsl.*
 import com.uniboard.board.presentation.socket.sockets
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -34,7 +31,6 @@ fun Application.board() {
                 call.respond(HttpStatusCode.BadRequest)
                 return@get
             }
-            println(boardRepository.all(id).map { it.state })
             call.respond(boardRepository.all(id).map { it.state }.toString().decoded)
         }
     }
@@ -44,7 +40,7 @@ fun CoroutineScope.boardSocketServer() = sockets {
     exception {
         it.printStackTrace()
     }
-    val boardRepository by GlobalContext.get().inject<BoardRepository>()
+    val boardRepository by inject<BoardRepository>()
     listen("connected") { data ->
         val boardId = data.toLongOrNull() ?: sendAndFinish("error", "Board ID is incorrect")
         join(boardId.toString())
@@ -80,12 +76,6 @@ private val Map<String, JsonElement>.id: String
         ?.jsonPrimitive
         ?.content
         .toString()
-
-private val String.boardObject: BoardObject
-    get() = Json.decodeFromString(this)
-
-private val BoardObject.json: String
-    get() = Json.encodeToString(this)
 
 @SocketIODSL
 private val Room.boardId: Long
