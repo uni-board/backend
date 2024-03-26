@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class BoardObject(
-    val id: Long,
+    val id: String,
     val state: String
 )
