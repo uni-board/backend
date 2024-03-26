@@ -1,6 +1,7 @@
 import com.uniboard.board.data.boardModule
 import com.uniboard.board.presentation.board
 import com.uniboard.board.presentation.boardSocketServer
+import com.uniboard.core.data.coreModule
 import com.uniboard.storage.data.storageModule
 import com.uniboard.storage.presentation.storage
 import io.ktor.http.*
@@ -26,6 +27,7 @@ import org.koin.ktor.plugin.Koin
 import org.slf4j.event.Level
 
 private val modules = listOf(
+    coreModule,
     boardModule,
     storageModule
 )

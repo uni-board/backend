@@ -15,6 +15,8 @@ dependencyResolutionManagement {
 //enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "backend"
 
+include("core:domain")
+include("core:data")
 include("storage:data")
 include("storage:domain")
 include("storage:presentation")

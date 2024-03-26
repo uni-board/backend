@@ -4,7 +4,7 @@ plugins {
 }
 configuration {
     internal {
-        +projects.core.domain
+        +project(":core:domain")
         +libs.koin.core
     }
     test {
