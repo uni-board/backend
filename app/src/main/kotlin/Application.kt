@@ -1,16 +1,11 @@
 import com.uniboard.board.data.boardModule
 import com.uniboard.board.presentation.board
-import com.uniboard.board.presentation.boardSocketServer
 import com.uniboard.core.data.coreModule
-import com.uniboard.core.domain.LogLevel
-import com.uniboard.core.domain.Logger
 import com.uniboard.storage.data.storageModule
 import com.uniboard.storage.presentation.storage
-import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
-import io.ktor.server.http.content.*
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.callloging.*
 import io.ktor.server.plugins.contentnegotiation.*
@@ -18,14 +13,8 @@ import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import io.ktor.util.logging.*
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.json.Json
 import org.koin.core.context.startKoin
-import org.koin.core.module.Module
-import org.koin.ktor.ext.inject
 import org.koin.ktor.plugin.Koin
 import org.slf4j.event.Level
 
@@ -72,9 +61,6 @@ private fun Application.installPlugins() {
     install(CORS) {
         anyHost()
     }
-    val coroutineScope by inject<CoroutineScope>()
-    coroutineScope.boardSocketServer()
-
     routing {
         get("hello") {
             call.respondText("Hello")

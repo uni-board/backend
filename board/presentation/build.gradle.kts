@@ -5,6 +5,7 @@ plugins {
 
 configuration {
     internal {
+        +project(":core:domain")
         +project(":board:domain")
         +libs.bundles.ktor
         +libs.socketio

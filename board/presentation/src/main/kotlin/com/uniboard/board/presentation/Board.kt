@@ -5,6 +5,7 @@ import com.uniboard.board.domain.BoardObject
 import com.uniboard.board.domain.BoardRepository
 import com.uniboard.board.presentation.socket.dsl.*
 import com.uniboard.board.presentation.socket.sockets
+import com.uniboard.core.domain.BuildConfig
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
@@ -20,6 +21,11 @@ import org.koin.ktor.ext.inject
 fun Application.board() {
     val allboards by inject<AllBoardsRepository>()
     val boardRepository by inject<BoardRepository>()
+    val buildConfig by inject<BuildConfig>()
+    if (buildConfig.SOCKETS_ENABLED) {
+        val coroutineScope by inject<CoroutineScope>()
+        coroutineScope.boardSocketServer()
+    }
     routing {
         post("/createboard") {
             val newID = allboards.add()
@@ -37,7 +43,7 @@ fun Application.board() {
     }
 }
 
-fun CoroutineScope.boardSocketServer() = sockets {
+private fun CoroutineScope.boardSocketServer() = sockets {
     exception {
         it.printStackTrace()
     }
