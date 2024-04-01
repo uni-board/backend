@@ -8,6 +8,8 @@ configuration {
         +libs.koin.core
         +libs.csv
         +libs.coroutines
+
+        +libs.mongodb
     }
     test {
         +libs.kotlin.test
