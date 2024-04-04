@@ -1,9 +1,9 @@
 package com.uniboard.storage.domain
 
 interface StorageDB {
-    fun add(): Long
+    fun add(): String
 
-    fun fileExists(id: Long): Boolean
+    fun fileExists(id: String): Boolean
 
-    fun delete(id: Long)
+    fun delete(id: String)
 }

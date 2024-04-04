@@ -4,61 +4,48 @@ import com.uniboard.board.domain.AllBoardsRepository;
 import com.mongodb.client.*;
 import org.bson.Document;
 
+import java.util.UUID;
+
 
 public class AllBoardsRepositoryImpl implements AllBoardsRepository {
     private String nameDatabase = "CreatedBoards";
     private MongoClient mongoClient;
-    private static boolean hasCollection(final MongoDatabase db, final String collectionName)
-    {
+
+    private static boolean hasCollection(final MongoDatabase db, final String collectionName) {
         assert db != null;
         assert collectionName != null && !collectionName.isEmpty();
-        try (final MongoCursor<String> cursor = db.listCollectionNames().iterator())
-        {
+        try (final MongoCursor<String> cursor = db.listCollectionNames().iterator()) {
             while (cursor.hasNext())
                 if (cursor.next().equals(collectionName))
                     return true;
         }
         return false;
     }
+
     public AllBoardsRepositoryImpl(MongoClient client) {
         mongoClient = client;
+    }
+
+    private UUID getFreeId() {
+        return UUID.randomUUID();
+    }
+
+
+    public String add() {
         MongoDatabase database = mongoClient.getDatabase(nameDatabase);
-        if (!hasCollection(database, "info")) {
-            MongoCollection<Document> collection = database.getCollection("info");
-            Document doc = new Document("freeId", (long) 0);
-            collection.insertOne(doc);
-        }
+        UUID uuid = getFreeId();
+        database.createCollection(uuid.toString());
+        return uuid.toString();
     }
 
-    private long getFreeId(MongoCollection<Document> info){
-        return (long) info.find().first().get("freeId");
-    }
-
-    private long updateInfo(MongoCollection<Document> info, MongoDatabase database){
-        long lastNumber = getFreeId(info);
-        while (hasCollection(database, Long.toString(lastNumber))){lastNumber++;}
-        Document query = new Document("freeId", lastNumber);
-        info.drop();
-        info.insertOne(query);
-        return lastNumber;
-    }
-
-    public long add(){
-        MongoDatabase database = mongoClient.getDatabase(nameDatabase);
-        long lastNumber = updateInfo(database.getCollection("info"), database);
-        database.createCollection(Long.toString(lastNumber));
-        return lastNumber;
-    }
-
-    public void delete(long idBoard) {
+    public void delete(String idBoard) {
         MongoDatabase database = mongoClient.getDatabase("CreatedBoards");
-        var todoCollection = database.getCollection(Long.toString(idBoard));
+        MongoCollection todoCollection = database.getCollection(idBoard);
         todoCollection.drop();
     }
 
-    public boolean exists(long id) {
+    public boolean exists(String idBoard) {
         MongoDatabase database = mongoClient.getDatabase("CreatedBoards");
-        return hasCollection(database, Long.toString(id));
+        return hasCollection(database, idBoard);
     }
-
 }

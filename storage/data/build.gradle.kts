@@ -8,6 +8,7 @@ configuration {
         +project(":storage:domain")
         +project(":core:domain")
         +libs.koin.core
+        +libs.mongodb
     }
     test {
         +libs.bundles.test

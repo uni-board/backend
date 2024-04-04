@@ -1,9 +1,9 @@
 package com.uniboard.board.domain
 
 interface AllBoardsRepository {
-    fun add(): Long
+    fun add(): String
 
-    fun exists(id: Long): Boolean
+    fun exists(id: String): Boolean
 
-    fun delete(id: Long)
+    fun delete(id: String)
 }
