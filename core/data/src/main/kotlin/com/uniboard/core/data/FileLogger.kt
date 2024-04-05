@@ -31,6 +31,7 @@ class FileLogger(config: BuildConfig, private val scope: CoroutineScope) : Logge
     }
 
     override fun log(level: LogLevel, tag: String, message: String) {
+        println("$level, $tag: $message")
         write(level, tag, message)
     }
 }

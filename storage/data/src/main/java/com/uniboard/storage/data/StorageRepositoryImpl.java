@@ -22,9 +22,10 @@ public class StorageRepositoryImpl implements StorageRepository {
         this.db = db;
     }
 
+    @NotNull
     @Override
-    public long put(@NotNull InputStream stream) {
-        long id = db.add();
+    public String put(@NotNull InputStream stream) {
+        String id = db.add();
         try {
             Files.copy(stream, Path.of(PATH + "/" + id));
         } catch (IOException e) {
@@ -35,7 +36,7 @@ public class StorageRepositoryImpl implements StorageRepository {
 
     @NotNull
     @Override
-    public InputStream get(long id) {
+    public InputStream get(@NotNull String id) {
         boolean exists = db.fileExists(id);
         if (exists) {
             try {
@@ -48,7 +49,7 @@ public class StorageRepositoryImpl implements StorageRepository {
     }
 
     @Override
-    public boolean fileExists(long id) {
+    public boolean fileExists(@NotNull String id) {
         return db.fileExists(id);
     }
 }

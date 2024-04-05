@@ -1,51 +1,43 @@
-package com.uniboard.board.data;
+package com.uniboard.board.data
 
-import com.uniboard.board.domain.AllBoardsRepository;
-import com.mongodb.client.*;
-import org.bson.Document;
+import com.mongodb.client.MongoClient
+import com.mongodb.client.MongoCollection
+import com.mongodb.client.MongoDatabase
+import com.uniboard.board.domain.AllBoardsRepository
+import java.util.*
 
-import java.util.UUID;
+class AllBoardsRepositoryImpl(private val mongoClient: MongoClient) : AllBoardsRepository {
+    private val nameDatabase = "CreatedBoards"
+
+    private val freeId: UUID
+        get() = UUID.randomUUID()
 
 
-public class AllBoardsRepositoryImpl implements AllBoardsRepository {
-    private String nameDatabase = "CreatedBoards";
-    private MongoClient mongoClient;
+    override fun add(): String {
+        val database = mongoClient.getDatabase(nameDatabase)
+        val uuid = freeId
+        database.createCollection(uuid.toString())
+        return uuid.toString()
+    }
 
-    private static boolean hasCollection(final MongoDatabase db, final String collectionName) {
-        assert db != null;
-        assert collectionName != null && !collectionName.isEmpty();
-        try (final MongoCursor<String> cursor = db.listCollectionNames().iterator()) {
-            while (cursor.hasNext())
-                if (cursor.next().equals(collectionName))
-                    return true;
+    override fun delete(idBoard: String) {
+        val database = mongoClient.getDatabase("CreatedBoards")
+        val todoCollection: MongoCollection<*> = database.getCollection(idBoard)
+        todoCollection.drop()
+    }
+
+    override fun exists(idBoard: String): Boolean {
+        val database = mongoClient.getDatabase("CreatedBoards")
+        return hasCollection(database, idBoard)
+    }
+
+    companion object {
+        private fun hasCollection(db: MongoDatabase, collectionName: String?): Boolean {
+            assert(collectionName != null && !collectionName.isEmpty())
+            db.listCollectionNames().iterator().use { cursor ->
+                while (cursor.hasNext()) if (cursor.next() == collectionName) return true
+            }
+            return false
         }
-        return false;
-    }
-
-    public AllBoardsRepositoryImpl(MongoClient client) {
-        mongoClient = client;
-    }
-
-    private UUID getFreeId() {
-        return UUID.randomUUID();
-    }
-
-
-    public String add() {
-        MongoDatabase database = mongoClient.getDatabase(nameDatabase);
-        UUID uuid = getFreeId();
-        database.createCollection(uuid.toString());
-        return uuid.toString();
-    }
-
-    public void delete(String idBoard) {
-        MongoDatabase database = mongoClient.getDatabase("CreatedBoards");
-        MongoCollection todoCollection = database.getCollection(idBoard);
-        todoCollection.drop();
-    }
-
-    public boolean exists(String idBoard) {
-        MongoDatabase database = mongoClient.getDatabase("CreatedBoards");
-        return hasCollection(database, idBoard);
     }
 }

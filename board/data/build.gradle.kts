@@ -6,6 +6,7 @@ plugins {
 configuration {
     internal {
         +project(":board:domain")
+        +project(":core:domain")
         +libs.mongodb
 
         +libs.koin.core

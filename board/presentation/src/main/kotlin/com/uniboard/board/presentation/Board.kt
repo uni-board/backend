@@ -14,7 +14,6 @@ import io.ktor.util.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.*
-import org.koin.core.context.GlobalContext
 import org.koin.ktor.ext.inject
 
 private object Tags {
@@ -52,7 +51,7 @@ fun Application.board() {
             logger.withTag(Tags.BOARD_API_ALL_OBJECTS) {
                 info("Getting all objects")
 
-                val id = call.parameters["id"]?.toLongOrNull()
+                val id = call.parameters["id"]
                 info("Requested ID: $id")
 
                 if (id == null || !allboards.exists(id)) {
@@ -84,9 +83,8 @@ private fun CoroutineScope.boardSocketServer() = sockets {
         listen("connected") { data ->
             info("Connecting with $data")
 
-            val boardId = data.toLongOrNull() ?: sendAndFinish("error", "Board ID is incorrect")
-            join(boardId.toString())
-            info("Connected with BoardID=$boardId")
+            join(data)
+            info("Connected with BoardID=$data")
         }
     }
     listen("created") { data ->
@@ -148,8 +146,8 @@ private val Map<String, JsonElement>.id: String
         .toString()
 
 @SocketIODSL
-private val Room.boardId: Long
-    get() = id.toLong()
+private val Room.boardId: String
+    get() = id
 
 private val String.decoded: JsonElement
     get() = Json.decodeFromString(this)

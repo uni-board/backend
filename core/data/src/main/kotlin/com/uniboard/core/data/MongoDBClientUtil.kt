@@ -1,12 +1,10 @@
-package com.uniboard.core.data;
+package com.uniboard.core.data
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoClient
+import com.mongodb.client.MongoClients
 
-public class MongoDBClientUtil {
-    private final static String url = "mongodb://localhost:27017";
-
-    public static MongoClient create(){
-        return MongoClients.create(url);
+object MongoDBClientUtil {
+    fun create(url: String?): MongoClient {
+        return MongoClients.create(url!!)
     }
 }

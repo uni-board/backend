@@ -1,21 +1,23 @@
 package com.uniboard.board.data
 
 import com.uniboard.board.domain.AllBoardsRepository
+import java.util.UUID
 
 class AllBoardsRepositoryInMemory: AllBoardsRepository {
-    private val boards = mutableListOf<Long>()
-    override fun add(): Long {
-        val lastId = boards.lastOrNull() ?: -1
-        boards.add(lastId + 1)
-        return lastId + 1
+    private val boards = mutableListOf<String>()
+    override fun add(): String{
+        val uuid = UUID.randomUUID().toString()
+        println(uuid)
+        boards.add(uuid)
+        return uuid
     }
 
-    override fun exists(id: Long): Boolean {
+    override fun exists(id: String): Boolean {
         return id in boards
     }
 
 
-    override fun delete(id: Long) {
+    override fun delete(id: String) {
         boards.remove(id)
     }
 }

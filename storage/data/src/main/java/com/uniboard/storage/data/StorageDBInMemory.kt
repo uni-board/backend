@@ -1,20 +1,21 @@
 package com.uniboard.storage.data
 
 import com.uniboard.storage.domain.StorageDB
+import java.util.UUID
 
 class StorageDBInMemory: StorageDB {
-    private val files = mutableSetOf<Long>()
-    override fun add(): Long {
-        val lastId = files.lastOrNull() ?: -1
-        files.add(lastId + 1)
-        return lastId + 1
+    private val files = mutableSetOf<String>()
+    override fun add(): String {
+        val uuid = UUID.randomUUID().toString()
+        files.add(uuid)
+        return uuid
     }
 
-    override fun fileExists(id: Long): Boolean {
+    override fun fileExists(id: String): Boolean {
         return id in files
     }
 
-    override fun delete(id: Long) {
+    override fun delete(id: String) {
         files.remove(id)
     }
 }

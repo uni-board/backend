@@ -1,75 +1,66 @@
-package com.uniboard.board.data;
+package com.uniboard.board.data
 
-import com.mongodb.client.*;
-import com.mongodb.client.model.Filters;
-import com.uniboard.board.domain.BoardObject;
-import com.uniboard.board.domain.BoardRepository;
-import org.bson.Document;
+import com.mongodb.client.MongoClient
+import com.mongodb.client.MongoDatabase
+import com.mongodb.client.model.Filters
+import com.uniboard.board.domain.BoardObject
+import com.uniboard.board.domain.BoardRepository
+import org.bson.Document
+import java.util.stream.Collectors
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+class BoardRepositoryImpl(private val mongoClient: MongoClient) : BoardRepository {
+    private val nameDatabase = "CreatedBoards"
 
-public class BoardRepositoryImpl implements BoardRepository {
-    private String nameDatabase = "CreatedBoards";
-    private MongoClient mongoClient;
-
-    public BoardRepositoryImpl(MongoClient client) {
-        mongoClient = client;
+    private fun fromDocumentToBoardObject(document: Document): BoardObject {
+        return BoardObject((document["id"] as String?)!!, (document["state"] as String?)!!)
     }
 
-    private static boolean hasCollection(final MongoDatabase db, final String collectionName)
-    {
-        assert db != null;
-        assert collectionName != null && !collectionName.isEmpty();
-        try (final MongoCursor<String> cursor = db.listCollectionNames().iterator())
-        {
-            while (cursor.hasNext())
-                if (cursor.next().equals(collectionName))
-                    return true;
+
+    override fun all(boardId: String): List<BoardObject> {
+        val database = mongoClient.getDatabase(nameDatabase)
+        val collection = database.getCollection(boardId)
+        val documents: List<Document> = collection.find().into(ArrayList())
+        return documents.stream().map { document: Document -> this.fromDocumentToBoardObject(document) }
+            .collect(Collectors.toList())
+    }
+
+
+    override fun add(boardId: String, element: BoardObject) {
+        val database = mongoClient.getDatabase(nameDatabase)
+        val collection = database.getCollection(boardId)
+        val doc = Document("id", element.id).append("state", element.state)
+        collection.insertOne(doc)
+    }
+
+
+    override fun get(boardId: String, id: String): String {
+        val database = mongoClient.getDatabase(nameDatabase)
+        val collection = database.getCollection(boardId)
+        return collection.find(Filters.eq("id", id)).first()!!["state"] as String
+    }
+
+
+    override fun delete(boardId: String, id: String) {
+        val database = mongoClient.getDatabase(nameDatabase)
+        val collection = database.getCollection(boardId)
+        collection.deleteOne(Filters.eq("id", id))
+    }
+
+    override fun set(boardId: String, element: BoardObject) {
+        val database = mongoClient.getDatabase(nameDatabase)
+        val collection = database.getCollection(boardId)
+        delete(boardId, element.id)
+        add(boardId, element)
+    }
+
+    companion object {
+        private fun hasCollection(db: MongoDatabase, collectionName: String?): Boolean {
+            checkNotNull(db)
+            assert(collectionName != null && !collectionName.isEmpty())
+            db.listCollectionNames().iterator().use { cursor ->
+                while (cursor.hasNext()) if (cursor.next() == collectionName) return true
+            }
+            return false
         }
-        return false;
-    }
-
-
-    private BoardObject fromDocumentToBoardObject(Document document){
-        return new BoardObject((String) document.get("id"), (String) document.get("state"));
-    }
-
-
-    public List<BoardObject> all(long boardId){
-        MongoDatabase database = mongoClient.getDatabase(nameDatabase);
-        MongoCollection<Document> collection = database.getCollection(Long.toString(boardId));
-        List<Document> documents = collection.find().into(new ArrayList<>());
-        return documents.stream().map(this::fromDocumentToBoardObject).collect(Collectors.toList());
-    }
-
-
-    public void add(long boardId, BoardObject element) {
-        MongoDatabase database = mongoClient.getDatabase(nameDatabase);
-        MongoCollection<Document> collection = database.getCollection(Long.toString(boardId));
-        Document doc = new Document("id", element.getId()).append("state", element.getState());
-        collection.insertOne(doc);
-    }
-
-
-    public String get(long boardId, String id){
-        MongoDatabase database = mongoClient.getDatabase(nameDatabase);
-        MongoCollection<Document> collection = database.getCollection(Long.toString(boardId));
-        return (String) collection.find(Filters.eq("id", id)).first().get("state");
-    }
-
-
-    public void delete(long boardId, String id){
-        MongoDatabase database = mongoClient.getDatabase(nameDatabase);
-        MongoCollection<Document> collection = database.getCollection(Long.toString(boardId));
-        collection.deleteOne(Filters.eq("id", id));
-    }
-
-    public void set(long boardId, BoardObject element) {
-        MongoDatabase database = mongoClient.getDatabase(nameDatabase);
-        MongoCollection<Document> collection = database.getCollection(Long.toString(boardId));
-        delete(boardId, element.getId());
-        add(boardId, element);
     }
 }

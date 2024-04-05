@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AddFileResponse(
-    val id: Long,
+    val id: String,
     val url: String
 )

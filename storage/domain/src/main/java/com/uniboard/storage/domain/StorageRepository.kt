@@ -3,9 +3,9 @@ package com.uniboard.storage.domain
 import java.io.InputStream
 
 interface StorageRepository {
-    fun put(stream: InputStream): Long
+    fun put(stream: InputStream): String
 
-    fun get(id: Long): InputStream
+    fun get(id: String): InputStream
 
-    fun fileExists(id: Long): Boolean
+    fun fileExists(id: String): Boolean
 }
