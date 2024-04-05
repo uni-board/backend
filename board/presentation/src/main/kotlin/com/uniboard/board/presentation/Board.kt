@@ -42,7 +42,7 @@ fun Application.board() {
             logger.withTag(Tags.BOARD_API_CREATEDBOARD) {
                 info("Creating new board")
                 val newID = allboards.add()
-                info("New board ID: $newID")
+                debug("New board ID: $newID")
                 call.respond(mapOf("id" to newID))
                 info("Send response")
             }
@@ -52,7 +52,7 @@ fun Application.board() {
                 info("Getting all objects")
 
                 val id = call.parameters["id"]
-                info("Requested ID: $id")
+                debug("Requested ID: $id")
 
                 if (id == null || !allboards.exists(id)) {
                     call.respond(HttpStatusCode.BadRequest)
@@ -64,7 +64,7 @@ fun Application.board() {
                     return@get
                 }
                 val elements = boardRepository.all(id)
-                info("All elements size: ${elements.size}")
+                debug("All elements size: ${elements.size}")
 
                 call.respond(elements.map { it.state }.toString().decoded)
                 info("Got all objects")
@@ -96,44 +96,47 @@ private fun CoroutineScope.boardSocketServer() = sockets {
 
             val element = BoardObject(data.decoded.jsonObject.id, data)
             boardRepository.add(room.boardId, element)
-            info("Created object $element")
+            debug("Created object $element")
+            info("Created object")
         }
     }
     listen("modified") { data ->
         logger.withTag(Tags.BOARD_SOCKETS_MODIFIED + currentRoom?.id) {
-            info("Modifying object $data")
+            info("Modifying object")
 
             val room = requireRoomNotNull()
             room.send("modified", data)
 
             val newData = data.decoded.jsonObject.toMutableMap()
-            info("New data is $newData")
+            debug("New data is $newData")
 
             val id = newData.id
-            info("New data ID: $id")
+            debug("New data ID: $id")
 
             newData.remove("uniboardData")
             val oldData = boardRepository.get(room.boardId, id).decoded.jsonObject.toMutableMap()
-            info("Old data: $oldData")
+            debug("Old data: $oldData")
 
             newData.forEach { (key, value) ->
                 oldData[key] = value
             }
-            info("Modified data is $oldData")
+            debug("Modified data is $oldData")
 
             val element = BoardObject(id, JsonObject(oldData).encoded)
             boardRepository.set(room.boardId, element)
-            info("Modified object $element")
+            debug("Modified object $element")
+            info("Modified object")
         }
     }
     listen("deleted") { id ->
         logger.withTag(Tags.BOARD_SOCKETS_DELETED + currentRoom?.id) {
-            info("Deleting object with ID: $id")
+            info("Deleting object with ID")
 
             val room = requireRoomNotNull()
             room.send("deleted", id)
             boardRepository.delete(room.boardId, id)
-            info("Deleted object with ID: $id")
+            debug("Deleted object $id")
+            info("Deleted object with ID")
         }
     }
 }
