@@ -35,7 +35,6 @@ ktor {
         localImageName = "uniboard-backend"
         imageTag = "0.0.1-SNAPSHOT"
 
-        environmentVariable("IS_DOCKER", "true")
         portMappings = listOf(
             DockerPortMapping(
                 80,
