@@ -8,10 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.io.File
 
-class FileLogger(
-    private val config: BuildConfig,
-    private val scope: CoroutineScope
-) : Logger {
+class FileLogger(config: BuildConfig, private val scope: CoroutineScope) : Logger {
     private val writer = csvWriter()
     private val file by lazy {
         File("${config.WORKDIR}/log.csv").also { file ->
@@ -34,9 +31,6 @@ class FileLogger(
     }
 
     override fun log(level: LogLevel, tag: String, message: String) {
-        if (config.TRACE) {
-            println("$level, $tag: $message")
-            write(level, tag, message)
-        }
+        write(level, tag, message)
     }
 }
