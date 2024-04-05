@@ -21,13 +21,12 @@ fun Application.storage() {
                 data.forEachPart { part ->
                     if (part is PartData.FileItem) {
                         val id = storageRepository.put(part.streamProvider())
-                        // TODO: Set correct url
-                        call.respond(AddFileResponse(id, "http://1.2.3.4/storage/$id"))
+                        call.respond(AddFileResponse(id))
                     }
                 }
             }
             get("/{id}") {
-                val id = call.parameters["id"]?.toString()
+                val id = call.parameters["id"]
                 if (id == null || !storageRepository.fileExists(id)) {
                     call.respond(HttpStatusCode.BadRequest)
                     return@get
