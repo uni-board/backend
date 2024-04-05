@@ -1,7 +1,6 @@
 package com.uniboard.board.data
 
 import com.mongodb.client.MongoClient
-import com.mongodb.client.MongoDatabase
 import com.mongodb.client.model.Filters
 import com.uniboard.board.domain.BoardObject
 import com.uniboard.board.domain.BoardRepository
@@ -47,20 +46,10 @@ class BoardRepositoryImpl(private val mongoClient: MongoClient) : BoardRepositor
     }
 
     override fun set(boardId: String, element: BoardObject) {
-        val database = mongoClient.getDatabase(nameDatabase)
-        val collection = database.getCollection(boardId)
         delete(boardId, element.id)
         add(boardId, element)
     }
 
     companion object {
-        private fun hasCollection(db: MongoDatabase, collectionName: String?): Boolean {
-            checkNotNull(db)
-            assert(collectionName != null && !collectionName.isEmpty())
-            db.listCollectionNames().iterator().use { cursor ->
-                while (cursor.hasNext()) if (cursor.next() == collectionName) return true
-            }
-            return false
-        }
     }
 }

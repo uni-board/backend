@@ -20,20 +20,19 @@ class AllBoardsRepositoryImpl(private val mongoClient: MongoClient) : AllBoardsR
         return uuid.toString()
     }
 
-    override fun delete(idBoard: String) {
+    override fun delete(id: String) {
         val database = mongoClient.getDatabase("CreatedBoards")
-        val todoCollection: MongoCollection<*> = database.getCollection(idBoard)
+        val todoCollection: MongoCollection<*> = database.getCollection(id)
         todoCollection.drop()
     }
 
-    override fun exists(idBoard: String): Boolean {
+    override fun exists(id: String): Boolean {
         val database = mongoClient.getDatabase("CreatedBoards")
-        return hasCollection(database, idBoard)
+        return hasCollection(database, id)
     }
 
     companion object {
         private fun hasCollection(db: MongoDatabase, collectionName: String?): Boolean {
-            assert(collectionName != null && !collectionName.isEmpty())
             db.listCollectionNames().iterator().use { cursor ->
                 while (cursor.hasNext()) if (cursor.next() == collectionName) return true
             }

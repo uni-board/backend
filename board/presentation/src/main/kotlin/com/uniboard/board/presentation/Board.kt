@@ -92,10 +92,10 @@ private fun CoroutineScope.boardSocketServer() = sockets {
             info("Creating object")
 
             val room = requireRoomNotNull()
+            room.send("created", data)
 
             val element = BoardObject(data.decoded.jsonObject.id, data)
             boardRepository.add(room.boardId, element)
-            room.send("created", data)
             info("Created object $element")
         }
     }
@@ -104,6 +104,8 @@ private fun CoroutineScope.boardSocketServer() = sockets {
             info("Modifying object $data")
 
             val room = requireRoomNotNull()
+            room.send("modified", data)
+
             val newData = data.decoded.jsonObject.toMutableMap()
             info("New data is $newData")
 
@@ -121,7 +123,6 @@ private fun CoroutineScope.boardSocketServer() = sockets {
 
             val element = BoardObject(id, JsonObject(oldData).encoded)
             boardRepository.set(room.boardId, element)
-            room.send("modified", data)
             info("Modified object $element")
         }
     }
@@ -130,8 +131,8 @@ private fun CoroutineScope.boardSocketServer() = sockets {
             info("Deleting object with ID: $id")
 
             val room = requireRoomNotNull()
-            boardRepository.delete(room.boardId, id)
             room.send("deleted", id)
+            boardRepository.delete(room.boardId, id)
             info("Deleted object with ID: $id")
         }
     }
