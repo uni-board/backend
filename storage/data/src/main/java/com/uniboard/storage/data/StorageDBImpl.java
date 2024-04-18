@@ -43,10 +43,7 @@ public class StorageDBImpl implements StorageDB {
     }
     public boolean fileExists(String id) {
         MongoDatabase database = mongoClient.getDatabase("CreatedBoards");
-        return hasCollection(database, id);
+        return hasCollection(database, nameCollection);
     }
 
-
-
 }
-
