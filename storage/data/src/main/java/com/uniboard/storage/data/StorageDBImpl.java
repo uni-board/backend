@@ -33,7 +33,7 @@ public class StorageDBImpl implements StorageDB {
 
     public String add(){
         MongoCollection collection = mongoClient.getDatabase(nameDatabase).getCollection(nameCollection);
-        return collection.insertOne(new Document()).getInsertedId().toString();
+        return collection.insertOne(new Document()).getInsertedId().asObjectId().getValue().toString();
     }
 
     public void delete(String idBoard) {

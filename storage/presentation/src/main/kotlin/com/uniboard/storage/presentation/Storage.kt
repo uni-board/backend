@@ -27,7 +27,7 @@ fun Application.storage() {
                 }
             }
             get("/{id}") {
-                val id = call.parameters["id"]?.toString()
+                val id = call.parameters["id"]
                 if (id == null || !storageRepository.fileExists(id)) {
                     call.respond(HttpStatusCode.BadRequest)
                     return@get
