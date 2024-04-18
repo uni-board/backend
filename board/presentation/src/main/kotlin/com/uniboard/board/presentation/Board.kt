@@ -67,7 +67,30 @@ fun Application.board() {
                 debug("All elements size: ${elements.size}")
 
                 call.respond(elements.map { it.state }.toString().decoded)
-                info("Got all objects")
+                info("Sent all objects")
+            }
+        }
+        get("/board/{id}/settings") {
+            logger.withTag(Tags.BOARD_API_ALL_OBJECTS) {
+                info("Getting all objects")
+
+                val id = call.parameters["id"]
+                debug("Requested ID: $id")
+
+                if (id == null || !allboards.exists(id)) {
+                    call.respond(HttpStatusCode.BadRequest)
+                    warn("Bad Request, ID: $id")
+
+                    if (id != null) {
+                        warn("Board exists: ${allboards.exists(id)}")
+                    }
+                    return@get
+                }
+                val settings = allboards.settings(id)
+                debug("Settings: $settings")
+
+                call.respond(settings)
+                info("Sent settings")
             }
         }
     }

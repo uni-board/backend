@@ -31,6 +31,14 @@ class AllBoardsRepositoryImpl(private val mongoClient: MongoClient) : AllBoardsR
         return hasCollection(database, id)
     }
 
+    override fun settings(id: String): String {
+        return "{}"
+    }
+
+    override fun edit(id: String, settings: String) {
+        // TODO
+    }
+
     companion object {
         private fun hasCollection(db: MongoDatabase, collectionName: String?): Boolean {
             db.listCollectionNames().iterator().use { cursor ->
