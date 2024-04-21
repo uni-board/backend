@@ -8,6 +8,7 @@ import com.uniboard.board.presentation.socket.dsl.SocketIODSL
 import com.uniboard.board.presentation.socket.dsl.SocketIOServer
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
 private class Listener(
@@ -47,7 +48,7 @@ fun CoroutineScope.sockets(port: Int = 8081, configure: SocketIO.() -> Unit) {
             launch(CoroutineExceptionHandler { _, throwable ->
                 if (exceptionHandlers.isEmpty()) throw throwable
                 mainExceptionHandler(dslServer, throwable)
-            }){
+            } + SupervisorJob()) {
                 listener.receive(dslServer, data)
             }
         }
