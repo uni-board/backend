@@ -13,7 +13,7 @@ services:
       DB_CONNECT: mongodb://10.5.0.3:27017 # required(if NO_DB=false), connect url to MongoDB
       SOCKETS_ENABLED: "true" # optional, Sockets API
       NO_DB: "false" # optional, if true, uses in-memory db, otherwise uses MongoDB
-      TRACE: "false" # optional, if true, writes all logs, system will be slower
+      TRACE: "true" # optional, if true, writes all logs, system will be slower
     ports:
       - 80:8080 # API
       - 81:8081 # Sockets
@@ -32,3 +32,5 @@ services:
     networks:
       board:
         ipv4_address: 10.5.0.3
+    volumes:
+      - ./db:/data/db

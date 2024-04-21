@@ -8,6 +8,7 @@ import com.uniboard.board.presentation.socket.sockets
 import com.uniboard.core.domain.*
 import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.util.*
@@ -25,6 +26,8 @@ private object Tags {
     const val BOARD_API = "Board API"
     const val BOARD_API_CREATEDBOARD = "$BOARD_API CreateBoard"
     const val BOARD_API_ALL_OBJECTS = "$BOARD_API All objects"
+    const val BOARD_API_GET_SETTINGS = "$BOARD_API Get Settings"
+    const val BOARD_API_EDIT_SETTINGS = "$BOARD_API Edit Settings"
 }
 
 @KtorDsl
@@ -67,7 +70,53 @@ fun Application.board() {
                 debug("All elements size: ${elements.size}")
 
                 call.respond(elements.map { it.state }.toString().decoded)
-                info("Got all objects")
+                info("Sent all objects")
+            }
+        }
+        get("/board/{id}/settings") {
+            logger.withTag(Tags.BOARD_API_GET_SETTINGS) {
+                info("Getting settings")
+
+                val id = call.parameters["id"]
+                debug("Requested ID: $id")
+
+                if (id == null || !allboards.exists(id)) {
+                    call.respond(HttpStatusCode.BadRequest)
+                    warn("Bad Request, ID: $id")
+
+                    if (id != null) {
+                        warn("Board exists: ${allboards.exists(id)}")
+                    }
+                    return@get
+                }
+                val settings = allboards.settings(id)
+                debug("Settings: $settings")
+
+                call.respond(settings)
+                info("Sent settings")
+            }
+        }
+        put("/board/{id}/settings/edit") {
+            logger.withTag(Tags.BOARD_API_EDIT_SETTINGS) {
+                info("Editing settings")
+
+                val id = call.parameters["id"]
+                debug("Requested ID: $id")
+
+                if (id == null || !allboards.exists(id)) {
+                    call.respond(HttpStatusCode.BadRequest)
+                    warn("Bad Request, ID: $id")
+
+                    if (id != null) {
+                        warn("Board exists: ${allboards.exists(id)}")
+                    }
+                    return@put
+                }
+                val body = call.receiveText()
+                allboards.edit(id, body)
+
+                call.respond(HttpStatusCode.OK)
+                info("Edited settings")
             }
         }
     }
@@ -113,7 +162,6 @@ private fun CoroutineScope.boardSocketServer() = sockets {
             val id = newData.id
             debug("New data ID: $id")
 
-            newData.remove("uniboardData")
             val oldData = boardRepository.get(room.boardId, id).decoded.jsonObject.toMutableMap()
             debug("Old data: $oldData")
 
