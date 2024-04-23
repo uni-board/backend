@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BoardRepositoryJava implements BoardRepository {
+public class BoardRepositoryImpl implements BoardRepository {
     private String nameDatabase = "CreatedBoards";
     private MongoClient mongoClient;
 
     
-    public BoardRepositoryJava(MongoClient mongoClient) {
+    public BoardRepositoryImpl(MongoClient mongoClient) {
         this.mongoClient = mongoClient;
     }
 
