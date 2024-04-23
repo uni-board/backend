@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.configuration)
     alias(libs.plugins.serialization)
     alias(libs.plugins.ktor)
+    application
 }
 
 configuration {
@@ -27,6 +28,10 @@ configuration {
     test {
 
     }
+}
+
+jib {
+    container.mainClass = "Main"
 }
 
 ktor {

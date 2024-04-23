@@ -25,7 +25,7 @@ private val modules = listOf(
     storageModule
 )
 
-fun main() {
+fun mainApp() {
     startKoin {
         modules(modules)
     }
