@@ -11,7 +11,9 @@ class BoardRepositoryImpl(private val mongoClient: MongoClient) : BoardRepositor
     private val nameDatabase = "CreatedBoards"
 
     private fun fromDocumentToBoardObject(document: Document): BoardObject {
-        return BoardObject((document["id"] as String?)!!, (document["state"] as String?)!!)
+        val id = document["id"]!!.toString()
+        val state = document["state"]!!.toString()
+        return BoardObject(id, state)
     }
 
 

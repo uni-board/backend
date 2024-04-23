@@ -1,14 +1,13 @@
 package com.uniboard.board.data;
 import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.model.Updates;
-import com.uniboard.board.domain.AllBoardsRepository;
 import com.mongodb.client.*;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import java.util.UUID;
 
 
-public class AllBoardsRepositoryJava implements AllBoardsRepository{
+public class AllBoardsRepositoryImpl implements com.uniboard.board.domain.AllBoardsRepository {
         private String nameDatabase = "CreatedBoards";
         private MongoClient mongoClient;
         private Document query = new Document("isSettings", true);
@@ -24,7 +23,7 @@ public class AllBoardsRepositoryJava implements AllBoardsRepository{
             return false;
         }
 
-        public AllBoardsRepositoryJava(MongoClient client) {
+        public AllBoardsRepositoryImpl(MongoClient client) {
             mongoClient = client;
         }
 
