@@ -30,6 +30,7 @@ public class AllBoardsRepositoryJava implements AllBoardsRepository {
     public AllBoardsRepositoryJava(MongoClient mongoClient) {
         this.mongoClient = mongoClient;
     }
+    
 
     private UUID getFreeId(){
         return UUID.randomUUID();
