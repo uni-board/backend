@@ -162,7 +162,6 @@ private fun CoroutineScope.boardSocketServer() = sockets {
             val id = newData.id
             debug("New data ID: $id")
 
-            newData.remove("uniboardData")
             val oldData = boardRepository.get(room.boardId, id).decoded.jsonObject.toMutableMap()
             debug("Old data: $oldData")
 
