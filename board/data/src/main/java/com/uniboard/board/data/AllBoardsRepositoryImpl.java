@@ -23,6 +23,7 @@ public class AllBoardsRepositoryImpl implements com.uniboard.board.domain.AllBoa
             return false;
         }
 
+        
         public AllBoardsRepositoryImpl(MongoClient client) {
             mongoClient = client;
         }

@@ -14,6 +14,7 @@ public class BoardRepositoryJava implements BoardRepository {
     private String nameDatabase = "CreatedBoards";
     private MongoClient mongoClient;
 
+    
     public BoardRepositoryJava(MongoClient mongoClient) {
         this.mongoClient = mongoClient;
     }
