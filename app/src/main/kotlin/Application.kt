@@ -3,6 +3,7 @@ import com.uniboard.board.presentation.board
 import com.uniboard.core.data.coreModule
 import com.uniboard.storage.data.storageModule
 import com.uniboard.storage.presentation.storage
+import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -59,6 +60,16 @@ private fun Application.installPlugins() {
         level = Level.INFO
     }
     install(CORS) {
+        methods += HttpMethod.Options
+        methods += HttpMethod.Get
+        methods += HttpMethod.Post
+        methods += HttpMethod.Put
+        methods += HttpMethod.Delete
+        methods += HttpMethod.Patch
+        headers += HttpHeaders.AccessControlAllowOrigin
+        allowNonSimpleContentTypes = true
+        allowCredentials = true
+        allowSameOrigin = true
         anyHost()
     }
     routing {
