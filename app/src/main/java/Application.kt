@@ -1,6 +1,8 @@
 import com.uniboard.board.data.boardModule
 import com.uniboard.board.presentation.board
 import com.uniboard.core.data.coreModule
+import com.uniboard.pdf.data.pdfModule
+import com.uniboard.pdf.presentation.pdf
 import com.uniboard.storage.data.storageModule
 import com.uniboard.storage.presentation.storage
 import io.ktor.http.*
@@ -22,7 +24,8 @@ import org.slf4j.event.Level
 private val modules = listOf(
     coreModule,
     boardModule,
-    storageModule
+    storageModule,
+    pdfModule
 )
 
 fun mainApp() {
@@ -39,6 +42,7 @@ fun Application.main() {
     installPlugins()
     board()
     storage()
+    pdf()
 }
 
 private fun Application.installPlugins() {

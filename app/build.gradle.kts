@@ -17,6 +17,9 @@ configuration {
 
         +project(":storage:presentation")
         +project(":storage:data")
+
+        +project(":pdf:data")
+        +project(":pdf:presentation")
         +libs.bundles.ktor
         +libs.koin.core
         +libs.koin.ktor

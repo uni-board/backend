@@ -17,9 +17,14 @@ rootProject.name = "backend"
 
 include("core:domain")
 include("core:data")
+
 include("storage:data")
 include("storage:domain")
 include("storage:presentation")
+
+include("pdf:data")
+include("pdf:domain")
+include("pdf:presentation")
 
 include("board:data")
 include("board:domain")

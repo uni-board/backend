@@ -14,6 +14,7 @@ mongodb = "5.0.0"
 slf4j = "2.0.12"
 csv = "1.9.3"
 coroutines = "1.8.0"
+pdfbox = "3.0.2"
 
 [libraries]
 ktor_core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
@@ -25,7 +26,7 @@ ktor_netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
 ktor_test = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }
 ktor_cors = { module = "io.ktor:ktor-server-cors", version.ref = "ktor" }
 
-csv = {module = "com.github.doyaaaaaken:kotlin-csv-jvm", version.ref = "csv" }
+csv = { module = "com.github.doyaaaaaken:kotlin-csv-jvm", version.ref = "csv" }
 slf4j_simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j" }
 slf4j_api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
 
@@ -38,8 +39,10 @@ koin_core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin_ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin" }
 
 kotlin_gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-coroutines =  {module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref =  "coroutines"}
+coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 
+pdfbox = { module = "org.apache.pdfbox:pdfbox", version.ref = "pdfbox" }
+pdfbox_io = { module = "org.apache.pdfbox:pdfbox-io", version.ref = "pdfbox" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 kotlin_test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin_test_junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
