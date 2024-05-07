@@ -28,6 +28,7 @@ public class StorageRepositoryImpl implements StorageRepository {
         String id = db.add();
         try {
             Files.copy(stream, Path.of(PATH + "/" + id));
+            stream.close();
         } catch (IOException e) {
             // TODO: Add logging
         }

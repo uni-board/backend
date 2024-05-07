@@ -10,6 +10,7 @@ configuration {
         +libs.koin.core
         +libs.pdfbox
         +libs.pdfbox.io
+        +libs.coroutines
     }
     test {
         +libs.bundles.test

@@ -3,5 +3,5 @@ package com.uniboard.pdf.domain
 import java.io.InputStream
 
 interface PdfRepository {
-    suspend fun splitToImages(pdf: InputStream): List<InputStream>
+    suspend fun <T> splitToImages(pdf: InputStream, process: suspend (InputStream) -> T): List<T>
 }

@@ -24,11 +24,12 @@ fun Application.pdf() {
                 call.respond(HttpStatusCode.NotFound)
                 return@post
             }
-            val stream = storageRepo.get(id)
-            val ids = pdfRepo.splitToImages(stream).map { inputStream ->
-                storageRepo.put(inputStream)
+            storageRepo.get(id).use { stream ->
+                val ids = pdfRepo.splitToImages(stream) { inputStream ->
+                    storageRepo.put(inputStream)
+                }
+                call.respond(ids.toList())
             }
-            call.respond(ids)
         }
     }
 }

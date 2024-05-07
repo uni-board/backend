@@ -8,17 +8,16 @@ import java.io.InputStream
 import javax.imageio.ImageIO
 
 class PdfRepositoryImpl : PdfRepository {
-    override suspend fun splitToImages(pdf: InputStream): List<InputStream> {
-        val document = Loader.loadPDF(pdf.readAllBytes())
-        val renderer = PDFRenderer(document)
-        return document.pages.mapIndexed { index, _ ->
-            val image = renderer.renderImageWithDPI(index, 300f)
-            val outputStream = ByteArrayOutputStream()
-            ImageIO.write(image, "png", outputStream)
-            outputStream.close()
-            outputStream.toByteArray().inputStream()
-        }.also {
-            document.close()
-        }
-    }
+    override suspend fun <T> splitToImages(pdf: InputStream, process: suspend (InputStream) -> T): List<T> =
+        Loader.loadPDF(pdf.readAllBytes()).use { document ->
+            val renderer = PDFRenderer(document)
+            (0 until document.numberOfPages).map { index ->
+                val image = renderer.renderImageWithDPI(index, 300f)
+                ByteArrayOutputStream().use { outputStream ->
+                    ImageIO.write(image, "png", outputStream)
+                    image.flush()
+                    process(outputStream.toByteArray().inputStream())
+                }
+            }
+        }.also { System.gc() }
 }
