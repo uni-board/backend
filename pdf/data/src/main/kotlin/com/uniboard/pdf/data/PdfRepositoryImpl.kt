@@ -17,7 +17,7 @@ class PdfRepositoryImpl : PdfRepository {
                     ImageIO.write(image, "png", outputStream)
                     image.flush()
                     process(outputStream.toByteArray().inputStream())
-                }
+                }.also { System.gc() }
             }
-        }.also { System.gc() }
+        }
 }
