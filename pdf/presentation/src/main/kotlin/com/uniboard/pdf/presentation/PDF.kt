@@ -3,10 +3,14 @@ package com.uniboard.pdf.presentation
 import com.uniboard.pdf.domain.PdfRepository
 import com.uniboard.storage.domain.StorageRepository
 import io.ktor.http.*
+import io.ktor.http.content.*
 import io.ktor.server.application.*
+import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.util.*
+import io.ktor.util.cio.*
+import io.ktor.utils.io.*
 import org.koin.ktor.ext.inject
 
 @KtorDsl
@@ -16,7 +20,7 @@ fun Application.pdf() {
     routing {
         post("/pdf/split") {
             val id = call.request.queryParameters["id"]
-            if (id == null || !storageRepo.fileExists(id)) {
+            if (id == null) {
                 call.respond(HttpStatusCode.BadRequest)
                 return@post
             }

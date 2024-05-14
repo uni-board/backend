@@ -57,13 +57,12 @@ fun Application.board() {
                 val id = call.parameters["id"]
                 debug("Requested ID: $id")
 
-                if (id == null || !allboards.exists(id)) {
+                if (id == null) {
                     call.respond(HttpStatusCode.BadRequest)
-                    warn("Bad Request, ID: $id")
-
-                    if (id != null) {
-                       warn("Board exists: ${allboards.exists(id)}")
-                    }
+                    return@get
+                }
+                if (!allboards.exists(id)) {
+                    call.respond(HttpStatusCode.NotFound)
                     return@get
                 }
                 val elements = boardRepository.all(id)
@@ -80,13 +79,12 @@ fun Application.board() {
                 val id = call.parameters["id"]
                 debug("Requested ID: $id")
 
-                if (id == null || !allboards.exists(id)) {
+                if (id == null) {
                     call.respond(HttpStatusCode.BadRequest)
-                    warn("Bad Request, ID: $id")
-
-                    if (id != null) {
-                        warn("Board exists: ${allboards.exists(id)}")
-                    }
+                    return@get
+                }
+                if (!allboards.exists(id)) {
+                    call.respond(HttpStatusCode.NotFound)
                     return@get
                 }
                 val settings = allboards.settings(id)
@@ -103,13 +101,12 @@ fun Application.board() {
                 val id = call.parameters["id"]
                 debug("Requested ID: $id")
 
-                if (id == null || !allboards.exists(id)) {
+                if (id == null) {
                     call.respond(HttpStatusCode.BadRequest)
-                    warn("Bad Request, ID: $id")
-
-                    if (id != null) {
-                        warn("Board exists: ${allboards.exists(id)}")
-                    }
+                    return@put
+                }
+                if (!allboards.exists(id)) {
+                    call.respond(HttpStatusCode.NotFound)
                     return@put
                 }
                 val body = call.receiveText()

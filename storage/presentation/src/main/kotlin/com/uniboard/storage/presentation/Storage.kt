@@ -27,8 +27,12 @@ fun Application.storage() {
             }
             get("/{id}") {
                 val id = call.parameters["id"]
-                if (id == null || !storageRepository.fileExists(id)) {
+                if (id == null) {
                     call.respond(HttpStatusCode.BadRequest)
+                    return@get
+                }
+                if (!storageRepository.fileExists(id)) {
+                    call.respond(HttpStatusCode.NotFound)
                     return@get
                 }
                 val stream = storageRepository.get(id)

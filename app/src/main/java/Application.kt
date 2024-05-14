@@ -64,21 +64,17 @@ private fun Application.installPlugins() {
         level = Level.INFO
     }
     install(CORS) {
-        methods += HttpMethod.Options
-        methods += HttpMethod.Get
-        methods += HttpMethod.Post
-        methods += HttpMethod.Put
-        methods += HttpMethod.Delete
-        methods += HttpMethod.Patch
+        HttpMethod.DefaultMethods.forEach { methods += it }
         headers += HttpHeaders.AccessControlAllowOrigin
+        headers += HttpHeaders.AccessControlAllowHeaders
+        headers += HttpHeaders.AccessControlExposeHeaders
+        headers += HttpHeaders.AccessControlMaxAge
+        headers += HttpHeaders.AccessControlRequestMethod
+        headers += HttpHeaders.AccessControlAllowCredentials
+        headers += HttpHeaders.AccessControlAllowMethods
         allowNonSimpleContentTypes = true
         allowCredentials = true
         allowSameOrigin = true
         anyHost()
-    }
-    routing {
-        get("hello") {
-            call.respondText("Hello")
-        }
     }
 }
